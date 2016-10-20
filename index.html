@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CS 4400</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="MyController" ng-init="getNames()">
+
+<div style="width: 50%">
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th class="col-md-4">NAME</th>
+            <th class="col-md-2">AGE</th>
+            <th class="col-md-6">MAJOR</th>
+        </tr>
+        <tr ng-repeat="user in users">
+            <td class="col-md-4">
+                {{user.Name}}
+            </td>
+            <td class="col-md-2">
+                {{user.Age}}
+            </td>
+            <td class="col-md-6">
+                {{user.Major}}
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
