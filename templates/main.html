@@ -1,0 +1,55 @@
+<div class="container-fluid">
+    <h2 style="text-align: center">Main Page </h2>
+    <br><br><br><br>
+    <h3><a ui-sref="home">Home Page</a></h3>
+    <div class="row">
+        <div class="col col-md-6">
+            <form>
+                <div class="form-group">
+                    <label for="title"> Title </label>
+                    <input type="text" class="form-control" id="title" placeholder="Enter title">
+                </div>
+
+                <div class="form-group">
+                    <label for="designation"> Designation </label>
+                    <ui-select ng-model="designation.selected" theme="bootstrap" id="designation">
+                        <ui-select-match>{{$select.selected.name}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="designation in designations | filter: {name: $select.search}">
+                            <div ng-bind-html="designation.name | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+
+                <div class="form-group">
+                    <label for="major"> Major </label>
+                    <ui-select ng-model="major.selected" theme="bootstrap" id="major">
+                        <ui-select-match>{{$select.selected.name}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="major in majors| filter: {name: $select.search}">
+                            <div ng-bind-html="major.name | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+
+                <div class="form-group">
+                    <label for="year"> Year </label>
+                    <ui-select ng-model="year.selected" theme="bootstrap" id="year">
+                        <ui-select-match>{{$select.selected.name}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="year in years| filter: {name: $select.search}">
+                            <div ng-bind-html="year.name | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <!--buttons-->
+    </div>
+
+
+</div>

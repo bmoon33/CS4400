@@ -1,4 +1,4 @@
-angular.module('myApp', ['ui.router', 'myAppControllers'])
+angular.module('myApp', ['ui.router', 'myAppControllers', 'ngSanitize', 'ui.select'])
 
 
     .config(function ($stateProvider, $urlRouterProvider) {
@@ -18,9 +18,29 @@ angular.module('myApp', ['ui.router', 'myAppControllers'])
                 controller: 'LoginController'
             })
 
+            .state('register', {
+                name: 'Register',
+                url: '/register',
+                templateUrl: 'templates/register.html',
+                controller: 'RegistrationController'
+            })
+
+            .state('mainPage', {
+                name: 'Main Page',
+                url: '/main',
+                templateUrl: 'templates/main.html',
+                controller: 'MainPageController'
+            })
+
+            .state('home', {
+                name: 'Home Page',
+                url: '/home',
+                templateUrl: 'templates/home.html'
+            })
+
         ;
 
-        $urlRouterProvider.otherwise('/users');
+        $urlRouterProvider.otherwise('/home');
 
 
     })
