@@ -6,4 +6,7 @@
 	//Connect
 	$conn = mysqli_connect($host, $user, $pass) or die("Could not connect");
 	$db = mysqli_select_db($conn, $db_name) or die("Could not connect");
+
+
+
 ?>

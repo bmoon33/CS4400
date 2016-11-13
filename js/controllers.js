@@ -12,19 +12,6 @@ angular.module('myAppControllers', ['myAppServices'])
                     console.log(response);
                 })
         };
-
-        $scope.getPins = function () {
-            var token = "AcTlQ_kuGf_7qnoPAS-lcpXq9YGAFIBo9Hyf81NDeN3TJQBFsgAAAAA";
-            var baseURL = "https://api.pinterest.com/v1/";
-            var me = "me/";
-            var boards = "boards/";
-            $http.get(baseURL + me + boards +
-                "?access_token=" + token)
-                .then(function (response) {
-                    console.log(response.data);
-                })
-
-        };
     })
 
     .controller('MainPageController', function ($scope, $http) {
@@ -51,7 +38,11 @@ angular.module('myAppControllers', ['myAppServices'])
         ];
     })
 
-    .controller('RegistrationController', function ($scope, $http) {
+    .controller('RegistrationController', function ($scope, $http, loginService) {
+        $scope.checkLoggedIn = function () {
+            console.log(loginService.loggedIn());
+        };
+
         $scope.createUser = function () {
             //Create new user
             swal({
@@ -62,29 +53,8 @@ angular.module('myAppControllers', ['myAppServices'])
         };
     })
 
-    .controller('LoginController', function ($scope, $http) {
-        $scope.login = function () {
-            /*
-            Login existing user
-             */
-            swal({
-                title: "Enter Your Password",
-                text: "Password is 2016",
-                type: "input",
-                inputType: "password",
-                showCancelButton: true,
-                closeOnConfirm : false
-            }, function(password) {
-                if (password === "") {
-                    swal.showInputError("Please enter a password");
-                    return false;
-                } else if (password === "2016") {
-                    swal("Correct!", "Please enjoy the videos", "success");
-                } else {
-                    swal.showInputError("Your password is incorrect!");
-                }
-            });
-        };
+    .controller('LoginController', function ($scope, $http, loginService) {
+        $scope.object = {};
 
         $scope.register = function () {
             /*
@@ -96,7 +66,16 @@ angular.module('myAppControllers', ['myAppServices'])
                 type: "info"
             });
         };
+
+        $scope.login = function () {
+            loginService.login($scope.object);
+        }
     })
 
+    .controller('HomeController', function ($scope, loginService) {
+        $scope.logout = function () {
+            loginService.logout();
+        };
+    })
 
 ;

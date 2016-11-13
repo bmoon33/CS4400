@@ -1,4 +1,4 @@
-angular.module('myApp', ['ui.router', 'myAppControllers', 'ngSanitize', 'ui.select'])
+angular.module('myApp', ['ui.router', 'myAppControllers', 'ngSanitize', 'ui.select', 'myAppServices'])
 
 
     .config(function ($stateProvider, $urlRouterProvider) {
@@ -15,27 +15,32 @@ angular.module('myApp', ['ui.router', 'myAppControllers', 'ngSanitize', 'ui.sele
                 name: 'Login',
                 url: '/login',
                 templateUrl: 'templates/login.html',
-                controller: 'LoginController'
+                controller: 'LoginController',
+                authenticate: false
             })
 
             .state('register', {
                 name: 'Register',
                 url: '/register',
                 templateUrl: 'templates/register.html',
-                controller: 'RegistrationController'
+                controller: 'RegistrationController',
+                authenticate: false
             })
 
             .state('mainPage', {
                 name: 'Main Page',
                 url: '/main',
                 templateUrl: 'templates/main.html',
-                controller: 'MainPageController'
+                controller: 'MainPageController',
+                authenticate: true
             })
 
             .state('home', {
                 name: 'Home Page',
                 url: '/home',
-                templateUrl: 'templates/home.html'
+                templateUrl: 'templates/home.html',
+                controller: 'HomeController',
+                authenticate: true
             })
 
         ;
@@ -43,6 +48,20 @@ angular.module('myApp', ['ui.router', 'myAppControllers', 'ngSanitize', 'ui.sele
         $urlRouterProvider.otherwise('/home');
 
 
+    })
+
+    .run(function ($rootScope, $state, loginService) {
+        $rootScope.$on("$stateChangeStart", function (event, toState) {
+            if (toState.authenticate) {
+                loginService.loggedIn()
+                    .then(function (msg) {
+                        if (!msg.data) {
+                            $state.transitionTo('login');
+                        }
+                    });
+
+            }
+        })
     })
 
 

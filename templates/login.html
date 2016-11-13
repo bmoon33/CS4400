@@ -4,13 +4,14 @@
     <div class="row">
         <form>
             <div class="form-group">
-                <label for="email"> Email address </label>
-                <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                <label for="user"> Email address </label>
+                <input type="user" ng-model="object.user" class="form-control" id="user" placeholder="Enter user">
             </div>
 
             <div class="form-group">
-                <label for="password"> Email address </label>
-                <input type="password" class="form-control" id="password" placeholder="Enter password">
+                <label for="password"> Password </label>
+                <input type="password" ng-model="object.password" class="form-control" id="password"
+                       placeholder="Enter password">
             </div>
 
         </form>
@@ -18,7 +19,6 @@
 
     <div class="row">
         <button class="btn btn-success btn-block" ng-click="login()">Login</button>
-
         <button class="btn btn-primary btn-block" ng-click="register()">Register</button>
     </div>
 
