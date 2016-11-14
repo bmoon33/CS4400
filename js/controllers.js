@@ -3,39 +3,54 @@
  */
 angular.module('myAppControllers', ['myAppServices'])
 
-    .controller('MyController', function ($scope, $http) {
-        $scope.getNames = function () {
-            $http.get("DBFiles/users.php")
-                .then(function (response) {
-                    $scope.users = response.data.Users;
-                }, function errorCallback(response) {
-                    console.log(response);
-                })
-        };
-    })
-
     .controller('MainPageController', function ($scope, $http) {
+        $scope.object = {};
+
+        $scope.isNavCollapsed = false;
+
+        $scope.clicked = function () {
+            console.log($scope.object);
+        };
         $scope.designations = [
-            {name: 'Sustainable Communities'},
-            {name: 'Community'}
+            'Sustainable Communities',
+            'Community'
 
         ];
 
         $scope.majors = [
-            {name: 'CS'},
-            {name: 'IE'},
-            {name: 'Math'},
-            {name: 'EE'},
-            {name: 'Business (lol)'}
+            'CS',
+            'IE',
+            'Math',
+            'EE',
+            'Business (lol)'
+        ];
+
+        $scope.categories = [
+            'Category 1',
+            'Category 2',
+            'Category 3',
+            'Category 4'
         ];
 
         $scope.years = [
-            {name: 'Freshman'},
-            {name: 'Sophomore'},
-            {name: 'Junior'},
-            {name: 'Senior'},
-            {name: 'Never gonna leave'}
+            'Freshman',
+            'Sophomore',
+            'Junior',
+            'Senior',
+            'Never gonna leave'
         ];
+
+        $scope.projects = [
+            {name: 'Project 1', type: 'Course'},
+            {name: 'Project 2', type: 'Course'},
+            {name: 'Project 3', type: 'Project'},
+            {name: 'Project 4', type: 'Project'},
+            {name: 'Project 5', type: 'Course'},
+            {name: 'Project 6', type: 'Project'},
+            {name: 'Project 7', type: 'Course'},
+            {name: 'Project 8', type: 'Course'},
+            {name: 'Project 9', type: 'Project'}
+        ]
     })
 
     .controller('RegistrationController', function ($scope, $http, loginService) {
@@ -45,24 +60,12 @@ angular.module('myAppControllers', ['myAppServices'])
         // $scope.passwordFormat = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
         $scope.createUser = function () {
-            //Create new user
             loginService.register($scope.object);
         };
     })
 
     .controller('LoginController', function ($scope, $http, loginService) {
         $scope.object = {};
-
-        $scope.register = function () {
-            /*
-             Register new user
-             */
-            swal({
-                title: "New User Register",
-                text: "Redirect to register page",
-                type: "info"
-            });
-        };
 
         $scope.login = function () {
             loginService.login($scope.object);
@@ -75,19 +78,18 @@ angular.module('myAppControllers', ['myAppServices'])
         };
     })
 
-    .controller('ProfileController', function ($scope, $http) {
+    .controller('ProfileController', function ($scope, $http, profileService) {
         $scope.object = {};
+        $scope.object.dept = "College of Computing";
 
         $scope.getValues = function () {
-            $http.get('DBFiles/getProfile.php')
-                .then(function (res) {
-                    console.log(res);
-                    if (res) {
-                        $scope.object.major = res.data[0].MajorName;
-                        $scope.object.year = res.data[0].year;
-                    }
-                    console.log($scope.object);
-                })
+            var profile = profileService.get();
+            profile.then(function (res) {
+                if (res) {
+                    $scope.object.major = res.data[0].MajorName;
+                    $scope.object.year = res.data[0].year;
+                }
+            })
         };
 
         $scope.majors = [
@@ -107,32 +109,26 @@ angular.module('myAppControllers', ['myAppServices'])
         ];
 
         $scope.submit = function () {
-            var object = {major: $scope.object.major, year: $scope.object.year};
-            console.log(object);
-            $http({
-                method: 'POST',
-                url: 'DBFiles/editProfile.php',
-                data: object
-            })
-                .then(function (res) {
-                    console.log(res);
-                    if (res.data) {
-                        swal({
-                            title: "Error",
-                            text: "Please try again",
-                            type: "error"
-                        })
-                    } else {
-                        swal({
-                            title: "Success!",
-                            text: "Profile updated",
-                            type: "success"
-                        })
-                    }
-                });
+            profileService.update($scope.object);
         }
 
 
+    })
+
+    .controller('MeController', function ($scope) {
+        //    Functionality for "Me" page if needed
+    })
+
+    .controller('MyApplicationController', function ($scope) {
+        $scope.apps = [
+            {date: '10/14/2016', name: 'Project 1', status: 'Approved'},
+            {date: '11/24/2016', name: 'Project 2', status: 'Pending'},
+            {date: '1/7/2015', name: 'Project 3', status: 'Approved'},
+            {date: '8/3/2014', name: 'Project 4', status: 'Approved'},
+            {date: '4/25/2015', name: 'Project 5', status: 'Rejected'},
+            {date: '6/11/2016', name: 'Project 6', status: 'Pending'}
+
+        ]
     })
 
 ;

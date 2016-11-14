@@ -1,15 +1,9 @@
-angular.module('myApp', ['ui.router', 'myAppControllers', 'ngSanitize', 'ui.select', 'myAppDirectives'])
+angular.module('myApp', ['ui.router', 'ui.bootstrap', 'myAppControllers', 'ngSanitize', 'ui.select', 'myAppDirectives'])
 
 
     .config(function ($stateProvider, $urlRouterProvider) {
 
         $stateProvider
-            .state('users', {
-                name: 'Users',
-                url: '/users',
-                templateUrl: 'templates/users.html',
-                controller: 'MyController'
-            })
 
             .state('login', {
                 name: 'Login',
@@ -51,6 +45,22 @@ angular.module('myApp', ['ui.router', 'myAppControllers', 'ngSanitize', 'ui.sele
                 authenticate: true
             })
 
+            .state('me', {
+                name: 'Me',
+                url: '/me',
+                templateUrl: 'templates/me.html',
+                controller: 'MeController',
+                authenticate: true
+            })
+
+            .state('myApplication', {
+                name: 'My Application',
+                url: '/myApplication',
+                templateUrl: 'templates/myApplication.html',
+                controller: 'MyApplicationController',
+                authenticate: true
+            })
+
         ;
 
         $urlRouterProvider.otherwise('/home');
@@ -63,7 +73,6 @@ angular.module('myApp', ['ui.router', 'myAppControllers', 'ngSanitize', 'ui.sele
             if (toState.authenticate) {
                 loginService.loggedIn()
                     .then(function (msg) {
-                        console.log(msg);
                         if (!msg.data) {
                             $state.transitionTo('login');
                         }

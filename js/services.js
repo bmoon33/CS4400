@@ -3,7 +3,7 @@
  */
 angular.module('myAppServices', [])
 
-    .factory("loginService", function ($http, sessionService, $state) {
+    .factory("loginService", function ($http, $state) {
         return {
             login: function (data) {
                 $http({
@@ -25,8 +25,10 @@ angular.module('myAppServices', [])
                     });
             },
             logout: function () {
-                sessionService.destroy();
-                $state.transitionTo('login');
+                $http.post('DBFiles/destroySession.php')
+                    .then(function () {
+                        $state.transitionTo('login');
+                    });
             },
             loggedIn: function () {
                 return $http.post('DBFiles/auth.php');
@@ -40,7 +42,6 @@ angular.module('myAppServices', [])
                     .then(function (res) {
                         var uid = res.data;
                         if (uid) {
-                            console.log(uid);
                             if (uid == "Email exists") {
                                 swal({
                                     title: "Error",
@@ -72,10 +73,33 @@ angular.module('myAppServices', [])
         }
     })
 
-    .factory("sessionService", function ($http) {
+
+    .factory("profileService", function ($http) {
         return {
-            destroy: function () {
-                $http.post('DBFiles/destroySession.php');
+            get: function () {
+                return $http.get('DBFiles/getProfile.php');
+            },
+            update: function (data) {
+                $http({
+                    method: 'POST',
+                    url: 'DBFiles/editProfile.php',
+                    data: data
+                })
+                    .then(function (res) {
+                        if (res.data) {
+                            swal({
+                                title: "Error",
+                                text: "Please try again",
+                                type: "error"
+                            })
+                        } else {
+                            swal({
+                                title: "Success!",
+                                text: "Profile updated",
+                                type: "success"
+                            })
+                        }
+                    });
             }
         }
     })

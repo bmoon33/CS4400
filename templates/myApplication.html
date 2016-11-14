@@ -1,0 +1,33 @@
+<div class="container-fluid" title="Me">
+    <br>
+
+    <div align="center">
+        <h1><u>My Applications</u></h1>
+        <h3><a ui-sref="home">Home</a></h3>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="table-responsive">
+                    <table class="table table-condensed table-hover table-bordered table-striped" ts-wrapper>
+                        <thead>
+                        <th class="col-md-2"> Date</th>
+                        <th class="col-md-8"> Project Name</th>
+                        <th class="col-md-2"> Status</th>
+
+                        </thead>
+                        <tr ng-repeat="app in apps">
+                            <td class="col-md-2">{{app.date}}</td>
+                            <td class="col-md-8">{{app.name}}</td>
+                            <td class="col-md-2">{{app.status}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
