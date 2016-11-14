@@ -1,4 +1,4 @@
-angular.module('myApp', ['ui.router', 'myAppControllers', 'ngSanitize', 'ui.select', 'myAppServices'])
+angular.module('myApp', ['ui.router', 'myAppControllers', 'ngSanitize', 'ui.select', 'myAppDirectives'])
 
 
     .config(function ($stateProvider, $urlRouterProvider) {

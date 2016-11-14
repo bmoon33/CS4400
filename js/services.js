@@ -14,7 +14,6 @@ angular.module('myAppServices', [])
                     .then(function (res) {
                         var uid = res.data;
                         if (uid) {
-                            // sessionService.set('user', uid);
                             $state.transitionTo('home');
                         } else {
                             swal({
@@ -37,12 +36,6 @@ angular.module('myAppServices', [])
 
     .factory("sessionService", function ($http) {
         return {
-            set: function (key, value) {
-                return sessionStorage.setItem(key, value);
-            },
-            get: function (key) {
-                return sessionStorage.getItem(key);
-            },
             destroy: function () {
                 $http.post('DBFiles/destroySession.php');
             }

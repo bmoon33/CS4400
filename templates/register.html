@@ -1,35 +1,87 @@
 <div class="container-fluid">
     <br>
-    <button ng-click="checkLoggedIn()">Click to check login status</button>
+    <h3><a ui-sref="home">Home Page</a></h3>
     <div class="row">
-        <form>
-            <div class="form-group">
-                <label for="email"> Username </label>
-                <input type="text" class="form-control" id="username" placeholder="Enter your username">
+        <form name="registration" novalidate>
+
+            <div class="form-group"
+                 ng-class="{'has-error': registration.user.$error.minlength && !registration.user.$pristine}">
+
+                <label for="user"> Username </label>
+
+                <input type="text" name="user" ng-model="object.user" class="form-control"
+                       id="user" placeholder="Enter username" ng-minlength="4" required>
+
+                <p ng-show="registration.user.$error.minlength && !registration.user.$pristine" class="help-block">
+                    Username must be at least 4 characters long
+                </p>
+
+
             </div>
 
-            <div class="form-group">
+            <div class="form-group"
+                 ng-class="{'has-error': registration.email.$error.pattern && !registration.email.$pristine}">
+
                 <label for="email"> GT Email address </label>
-                <input type="email" class="form-control" id="email" placeholder="Enter your Georgia Tech email">
+
+                <input type="email" name="email" ng-model="object.email" class="form-control"
+                       ng-pattern="emailFormat"
+                       id="email" placeholder="Enter your Georgia Tech email" required>
+
+                <p ng-show="registration.email.$error.pattern && !registration.email.$pristine" class="help-block">
+                    Must use your Georgia Tech email
+                </p>
+
+
             </div>
 
-            <div class="form-group">
+            <div class="form-group"
+                 ng-class="{'has-error': registration.password.$error.pattern && !registration.password.$pristine}">
+
                 <label for="password"> Password </label>
-                <input type="password" class="form-control" id="password" placeholder="Enter password">
+
+                <input type="password" name="password" ng-model="object.password"
+                       class="form-control" ng-pattern="passwordFormat"
+                       id="password" placeholder="Enter password" required>
+
+                <div ng-show="registration.password.$error.pattern" class="help-block">
+                    <p>
+                        Password must contain at least:
+                    </p>
+                    <ul>
+                        <li>One uppercase character</li>
+                        <li>One lowercase character</li>
+                        <li>One digit</li>
+                        <li>One special character</li>
+                        <li>8 total characters</li>
+                    </ul>
+                </div>
+
+
             </div>
 
-            <div class="form-group">
-                <label for="confirmPassword"> Confirm Password </label>
-                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm password">
+            <div class="form-group"
+                 ng-class="{'has-error': (registration.password2.$error.pwmatch || registration.password2.$error.pattern) && !registration.password2.$pristine}">
+
+                <label for="password2"> Confirm Password </label>
+
+                <input type="password" name="password2" ng-model="passConfirm" class="form-control"
+                       id="password2" placeholder="Enter password" required pw-check="object.password">
+
+
+                <p ng-show="registration.password2.$error.pwmatch && !registration.password2.$pristine"
+                   class="help-block">
+                    Passwords do not match
+                </p>
+
+
             </div>
+
+            <button type="submit" ng-disabled="registration.$invalid"
+                    class="btn btn-primary btn-block" ng-click="createUser()">Sign Up!
+            </button>
 
         </form>
     </div>
-
-    <h3><a ui-sref="home">Home Page</a></h3>
-    <div class="row">
-        <button class="btn btn-primary btn-block" ng-click="createUser()">Sign Up!</button>
-    </div>
-
 
 </div>

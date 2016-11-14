@@ -39,9 +39,9 @@ angular.module('myAppControllers', ['myAppServices'])
     })
 
     .controller('RegistrationController', function ($scope, $http, loginService) {
-        $scope.checkLoggedIn = function () {
-            console.log(loginService.loggedIn());
-        };
+        $scope.object = {};
+        $scope.emailFormat = /^[a-z]+[a-z0-9._]+@gatech.edu$/;
+        $scope.passwordFormat = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
         $scope.createUser = function () {
             //Create new user
