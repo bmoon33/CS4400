@@ -30,6 +30,44 @@ angular.module('myAppServices', [])
             },
             loggedIn: function () {
                 return $http.post('DBFiles/auth.php');
+            },
+            register: function (data) {
+                $http({
+                    method: 'POST',
+                    url: 'DBFiles/register.php',
+                    data: data
+                })
+                    .then(function (res) {
+                        var uid = res.data;
+                        if (uid) {
+                            console.log(uid);
+                            if (uid == "Email exists") {
+                                swal({
+                                    title: "Error",
+                                    text: "Email already exists",
+                                    type: "warning"
+                                })
+                            } else if (uid == "User exists") {
+                                swal({
+                                    title: "Error",
+                                    text: "Username already exists",
+                                    type: "warning"
+                                })
+                            } else {
+                                swal({
+                                    title: "Error",
+                                    text: "Please try again",
+                                    type: "error"
+                                })
+                            }
+                        } else {
+                            swal({
+                                title: "Registered",
+                                text: "Successfully signed up!",
+                                type: "success"
+                            })
+                        }
+                    });
             }
         }
     })

@@ -43,6 +43,14 @@ angular.module('myApp', ['ui.router', 'myAppControllers', 'ngSanitize', 'ui.sele
                 authenticate: true
             })
 
+            .state('editProfile', {
+                name: 'Edit Profile',
+                url: '/editProfile',
+                templateUrl: 'templates/editProfile.html',
+                controller: 'ProfileController',
+                authenticate: true
+            })
+
         ;
 
         $urlRouterProvider.otherwise('/home');
@@ -55,6 +63,7 @@ angular.module('myApp', ['ui.router', 'myAppControllers', 'ngSanitize', 'ui.sele
             if (toState.authenticate) {
                 loginService.loggedIn()
                     .then(function (msg) {
+                        console.log(msg);
                         if (!msg.data) {
                             $state.transitionTo('login');
                         }

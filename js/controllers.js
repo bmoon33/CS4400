@@ -41,15 +41,12 @@ angular.module('myAppControllers', ['myAppServices'])
     .controller('RegistrationController', function ($scope, $http, loginService) {
         $scope.object = {};
         $scope.emailFormat = /^[a-z]+[a-z0-9._]+@gatech.edu$/;
-        $scope.passwordFormat = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+        $scope.passwordFormat = /[a-z]/;
+        // $scope.passwordFormat = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
         $scope.createUser = function () {
             //Create new user
-            swal({
-                title: "Create new user",
-                text: "add user info to DB and go back to login page",
-                type: "info"
-            });
+            loginService.register($scope.object);
         };
     })
 
@@ -76,6 +73,66 @@ angular.module('myAppControllers', ['myAppServices'])
         $scope.logout = function () {
             loginService.logout();
         };
+    })
+
+    .controller('ProfileController', function ($scope, $http) {
+        $scope.object = {};
+
+        $scope.getValues = function () {
+            $http.get('DBFiles/getProfile.php')
+                .then(function (res) {
+                    console.log(res);
+                    if (res) {
+                        $scope.object.major = res.data[0].MajorName;
+                        $scope.object.year = res.data[0].year;
+                    }
+                    console.log($scope.object);
+                })
+        };
+
+        $scope.majors = [
+            'CS',
+            'IE',
+            'Math',
+            'EE',
+            'Business (lol)'
+        ];
+
+        $scope.years = [
+            'Freshman',
+            'Sophomore',
+            'Junior',
+            'Senior',
+            'Never gonna leave'
+        ];
+
+        $scope.submit = function () {
+            var object = {major: $scope.object.major, year: $scope.object.year};
+            console.log(object);
+            $http({
+                method: 'POST',
+                url: 'DBFiles/editProfile.php',
+                data: object
+            })
+                .then(function (res) {
+                    console.log(res);
+                    if (res.data) {
+                        swal({
+                            title: "Error",
+                            text: "Please try again",
+                            type: "error"
+                        })
+                    } else {
+                        swal({
+                            title: "Success!",
+                            text: "Profile updated",
+                            type: "success"
+                        })
+                    }
+                });
+        }
+
+
     })
 
 ;

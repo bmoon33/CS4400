@@ -10,10 +10,10 @@
                 <label for="user"> Username </label>
 
                 <input type="text" name="user" ng-model="object.user" class="form-control"
-                       id="user" placeholder="Enter username" ng-minlength="6" required>
+                       id="user" placeholder="Enter username" ng-minlength="4" required>
 
                 <p ng-show="loginForm.user.$error.minlength && !loginForm.user.$pristine" class="help-block">
-                    Username must be at least 6 characters long
+                    Username must be at least 4 characters long
                 </p>
 
 
