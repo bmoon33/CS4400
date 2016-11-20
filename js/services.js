@@ -103,4 +103,33 @@ angular.module('myAppServices', [])
             }
         }
     })
+
+    .factory("projectService", function ($http) {
+        return {
+            getLast: function () {
+                return localStorage.getItem("project");
+            },
+            updateLast: function (project) {
+                localStorage.setItem("project", project);
+            },
+            get: function () {
+                return $http.get("DBFiles/getProjects.php");
+            },
+            getInfo: function (data) {
+                return $http({
+                    method: 'POST',
+                    url: 'DBFiles/getProjectInfo.php',
+                    data: data
+                });
+            }
+        }
+    })
+
+    .factory("mainPageService", function ($http) {
+        return {
+            getFilters: function () {
+                return $http.get("DBFiles/getFilters.php");
+            }
+        }
+    })
 ;

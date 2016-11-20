@@ -61,6 +61,15 @@ angular.module('myApp', ['ui.router', 'ui.bootstrap', 'myAppControllers', 'ngSan
                 authenticate: true
             })
 
+            .state('project', {
+                name: 'Project',
+                url: '/project',
+                templateUrl: 'templates/project.html',
+                controller: 'ProjectController',
+                params: {data: null},
+                authenticate: true
+            })
+
         ;
 
         $urlRouterProvider.otherwise('/home');
@@ -69,12 +78,14 @@ angular.module('myApp', ['ui.router', 'ui.bootstrap', 'myAppControllers', 'ngSan
     })
 
     .run(function ($rootScope, $state, loginService) {
-        $rootScope.$on("$stateChangeStart", function (event, toState) {
+        $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState) {
             if (toState.authenticate) {
                 loginService.loggedIn()
                     .then(function (msg) {
                         if (!msg.data) {
                             $state.transitionTo('login');
+                        } else if (toState.name == 'project' && fromState.name != '' && fromState.name != 'mainPage') {
+                            $state.transitionTo('mainPage');
                         }
                     });
 

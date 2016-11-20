@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" ng-init = "init()">
     <h2 style="text-align: center">Main Page </h2>
 
     <h3><a ui-sref="home">Home Page</a></h3>
@@ -12,10 +12,10 @@
             <div class="form-group">
                 <label for="designation"> Designation </label>
                 <ui-select ng-model="object.designation" theme="bootstrap" id="designation">
-                    <ui-select-match>{{$select.selected}}
+                    <ui-select-match>{{$select.selected.Name}}
                     </ui-select-match>
-                    <ui-select-choices repeat="designation in designations | filter: $select.search">
-                        <div ng-bind-html="designation| highlight: $select.search"></div>
+                    <ui-select-choices repeat="designation in designations | filter: {Name: $select.search}">
+                        <div ng-bind-html="designation.Name | highlight: $select.search"></div>
                     </ui-select-choices>
                 </ui-select>
             </div>
@@ -49,10 +49,10 @@
                 <div class="form-group">
                     <label for="category"> Category </label>
                     <ui-select ng-model="object.category" theme="bootstrap" id="category">
-                        <ui-select-match>{{$select.selected}}
+                        <ui-select-match>{{$select.selected.Name}}
                         </ui-select-match>
-                        <ui-select-choices repeat="category in categories| filter: $select.search">
-                            <div ng-bind-html="category | highlight: $select.search"></div>
+                        <ui-select-choices repeat="category in categories| filter: {Name: $select.search}">
+                            <div ng-bind-html="category.Name | highlight: $select.search"></div>
                         </ui-select-choices>
                     </ui-select>
                 </div>
@@ -113,8 +113,10 @@
 
                         </thead>
                         <tr ng-repeat="project in projects">
-                            <td class="col-md-10">{{project.name}}</td>
-                            <td class="col-md-2">{{project.type}}</td>
+                            <td class="col-md-10">
+                                <a ui-sref="project({data: project.Name})">{{project.Name}}</a>
+                            </td>
+                            <td class="col-md-2">{{project.Type}}</td>
 
                         </tr>
                     </table>
