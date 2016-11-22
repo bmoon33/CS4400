@@ -4,13 +4,13 @@
     $jsonText = file_get_contents('php://input');
     $decodedText = html_entity_decode($jsonText);
     $myArray = json_decode('[' . $decodedText . ']', true);
-//Name, description, advisormeail, advisor_name, estnstudents, desgination_name
-    $name = $myArray[0]["projectname"];
-    $desc = $myArray[0]["description"];
-    $advname = $myArray[0]["advisorname"];
-    $advemail = $myArray[0]["advisoremail"];
-    $desname = $myArray[0]["desname"];
-    $eststudent = $myArray[0]["eststudent"];
+//Name, description, advisormeail, advisor_name, estnstudents, designation_name
+    $name = "Know Your Water Project"; //$myArray[0]["projectname"];
+    $desc = "asdf"; //$myArray[0]["description"];
+    $advname = "qwer";//$myArray[0]["advisorname"];
+    $advemail = "qqq"; //$myArray[0]["advisoremail"];
+    $desname = "Sustainable Communities"//$myArray[0]["desname"];
+    $eststudent = "aaaa"; //$myArray[0]["eststudent"];
 
     $sql = "SELECT * FROM Project WHERE ProjectName = '$name'";
     $result = mysqli_query($conn, $sql);
@@ -33,7 +33,7 @@
     }
 */
 
-    $sql = "INSERT INTO Project (ProjectName, Description, AdvisorName, AdvisorEmail, DesName, EstStudent) VALUES ('$name', '$desc', '$advname', '$advemail', '$desname', '$eststudent')";
+    $sql = "INSERT INTO Project (ProjectName, Description, Advisor_name, Advisor_email, Designation_name, Estimated_Num_of_Students) VALUES ('$name', '$desc', '$advname', '$advemail', '$desname', '$eststudent')";
     $result = mysqli_query($conn, $sql);
 
     if (!$result) {
