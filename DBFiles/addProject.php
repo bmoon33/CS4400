@@ -12,7 +12,7 @@
     $desname = $myArray[0]["desname"];
     $eststudent = $myArray[0]["eststudent"];
 
-    $sql = "SELECT * FROM Projects WHERE ProjectName = '$name'";
+    $sql = "SELECT * FROM Project WHERE ProjectName = '$name'";
     $result = mysqli_query($conn, $sql);
     $count = mysqli_num_rows($result);
 
@@ -33,7 +33,7 @@
     }
 */
 
-    $sql = "INSERT INTO Projects (ProjectName, Description, AdvisorName, AdvisorEmail, DesName, EstStudent) VALUES ('$name', '$desc', '$advname', '$advemail', '$desname', '$eststudent')";
+    $sql = "INSERT INTO Project (ProjectName, Description, AdvisorName, AdvisorEmail, DesName, EstStudent) VALUES ('$name', '$desc', '$advname', '$advemail', '$desname', '$eststudent')";
     $result = mysqli_query($conn, $sql);
 
     if (!$result) {

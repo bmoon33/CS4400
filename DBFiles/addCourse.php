@@ -11,7 +11,7 @@
     $desname = $myArray[0]["desname"];
     $eststudent = $myArray[0]["eststudent"];
 
-    $sql = "SELECT * FROM Courses WHERE Name = '$name'";
+    $sql = "SELECT * FROM Course WHERE Name = '$name'";
     $result = mysqli_query($conn, $sql);
     $count = mysqli_num_rows($result);
 
@@ -20,7 +20,7 @@
     	exit();
     }
 
-    $sql = "SELECT * FROM Courses WHERE CourseNumber = '$coursenumber'";
+    $sql = "SELECT * FROM Course WHERE CourseNumber = '$coursenumber'";
     $result = mysqli_query($conn, $sql);
     $count = mysqli_num_rows($result);
 
@@ -38,7 +38,7 @@
     	exit();
     }
 */
-    $sql = "INSERT INTO Courses (CourseNumber, Name, Instructor, DesName, EstStudent) VALUES ('$coursenumber', '$name', '$instructor', '$desname', '$eststudent')";
+    $sql = "INSERT INTO Course (CourseNumber, Name, Instructor, DesName, EstStudent) VALUES ('$coursenumber', '$name', '$instructor', '$desname', '$eststudent')";
     $result = mysqli_query($conn, $sql);
 
     if (!$result) {
