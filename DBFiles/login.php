@@ -9,7 +9,7 @@
     $user = $myArray[0]["user"];
     $password = $myArray[0]["password"];
 
-    $sql = "SELECT * FROM User WHERE UserName = '$user' AND Password = '$password'";
+    $sql = "SELECT * FROM User WHERE Username = '$user' AND Password = '$password'";
     $result = mysqli_query($conn, $sql);
     $count = mysqli_num_rows($result);
 

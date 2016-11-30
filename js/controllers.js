@@ -111,12 +111,14 @@ angular.module('myAppControllers', ['myAppServices'])
             var profile = profileService.get();
             profile.then(function (res) {
                 if (res) {
-                    $scope.object.major = res.data[0].MajorName;
+                    $scope.object.major = res.data[0].Major;
                     $scope.object.year = res.data[0].year;
+                    $scope.object.dept = res.data[0].Dept_name;
                 }
             })
         };
 
+        //Pull from DB when data entered
         $scope.majors = [
             'CS',
             'IE',

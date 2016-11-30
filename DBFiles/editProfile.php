@@ -10,7 +10,7 @@
     $year = $myArray[0]["year"];
     $user = $_SESSION['username'];
 
-    $sql = "UPDATE Students SET MajorName = '$major', year = '$year' WHERE UserName = '$user'";
+    $sql = "UPDATE User SET Major = '$major', year = '$year' WHERE Username = '$user'";
     $result = mysqli_query($conn, $sql);
 
     if (!$result) {

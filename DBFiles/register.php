@@ -9,7 +9,7 @@
     $email = $myArray[0]["email"];
     $password = $myArray[0]["password"];
 
-    $sql = "SELECT * FROM User WHERE UserName = '$user'";
+    $sql = "SELECT * FROM User WHERE Username = '$user'";
     $result = mysqli_query($conn, $sql);
     $count = mysqli_num_rows($result);
 
@@ -18,7 +18,7 @@
     	exit();
     }
 
-    $sql = "SELECT * FROM Students WHERE GTemail = '$email'";
+    $sql = "SELECT * FROM User WHERE Email = '$email'";
     $result = mysqli_query($conn, $sql);
     $count = mysqli_num_rows($result);
 
@@ -27,15 +27,7 @@
     	exit();
     }
 
-    $sql = "INSERT INTO Students (GTemail, UserName) VALUES ('$email', '$user')";
-    $result = mysqli_query($conn, $sql);
-
-    if (!$result) {
-    	print "Error";
-    	exit();
-    }
-
-    $sql = "INSERT INTO User VALUES ('$user', '$password', 'Student')";
+    $sql = "INSERT INTO User (Username, Email, UserType) VALUES ('$user', '$email', 'Student')";
     $result = mysqli_query($conn, $sql);
 
     if (!$result) {
