@@ -13,6 +13,11 @@ angular.module('myAppControllers', ['myAppServices'])
 
         $scope.applyFilters = function () {
             console.log($scope.object);
+            var promise = mainPageService.applyFilters($scope.object);
+            promise.then(function (res) {
+                $scope.projects = res.data;
+                console.log(res);
+            });
         };
 
         $scope.getProjects = function () {

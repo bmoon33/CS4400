@@ -6,7 +6,7 @@
         <div class="col col-md-6">
             <div class="form-group">
                 <label for="title"> Title </label>
-                <input type="text" class="form-control" id="title" placeholder="Enter title">
+                <input type="text" ng-model="object.title" class="form-control" id="title" placeholder="Enter title">
             </div>
 
             <div class="form-group">
@@ -20,6 +20,9 @@
                 </ui-select>
             </div>
 
+        </div>
+
+        <div class="col col-md-6">
             <div class="form-group">
                 <label for="major"> Major </label>
                 <ui-select ng-model="object.major" theme="bootstrap" id="major">
@@ -44,31 +47,22 @@
 
         </div>
 
-        <div class="col col-md-6">
-            <div class="col col-md-8">
-                <div class="form-group">
-                    <label for="category"> Categories</label>
-                    <ui-select multiple ng-model="object.category" theme="bootstrap" id="category">
-                        <ui-select-match>{{$item.Name}}
-                        </ui-select-match>
-                        <ui-select-choices repeat="category in categories| filter: $select.search">
-                            <div ng-bind-html="category.Name | highlight: $select.search"></div>
-                        </ui-select-choices>
-                    </ui-select>
-                </div>
 
+    </div>
+
+    <div class="row">
+        <div class="col col-md-12">
+            <div class="form-group">
+                <label for="category"> Categories</label>
+                <ui-select multiple ng-model="object.category" theme="bootstrap" id="category">
+                    <ui-select-match>{{$item.Name}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="category in categories| filter: $select.search">
+                        <div ng-bind-html="category.Name | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
             </div>
-
-            <div class="col col-md-4">
-                <label for="category"> Add Category </label>
-                <br>
-                <label type="button" class="btn btn-success btn-circle">
-                    +
-                </label>
-            </div>
-
         </div>
-
     </div>
 
     <div class="row">

@@ -185,6 +185,13 @@ angular.module('myAppServices', [])
         return {
             getFilters: function () {
                 return $http.get("DBFiles/getFilters.php");
+            },
+            applyFilters: function (data) {
+                return $http({
+                    method: 'POST',
+                    url: 'DBFiles/applyFilters.php',
+                    data: data
+                })
             }
         }
     })
