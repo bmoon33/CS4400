@@ -12,8 +12,9 @@ angular.module('myAppControllers', ['myAppServices'])
         };
 
         $scope.getProjects = function () {
-            var promise = projectService.get();
+            var promise = projectService.getAll();
             promise.then(function (res) {
+                console.log("projects: " + res.data);
                 $scope.projects = res.data;
             })
         };
@@ -23,7 +24,8 @@ angular.module('myAppControllers', ['myAppServices'])
             promise.then(function (res) {
                 $scope.categories = res.data.Category;
                 $scope.designations = res.data.Designation;
-                console.log(res.data);
+                $scope.majors = res.data.Major;
+                console.log(res.data.Major);
                 // $scope.majors = res.data.Major;
             })
         };
@@ -33,15 +35,6 @@ angular.module('myAppControllers', ['myAppServices'])
         $scope.clicked = function () {
             console.log($scope.object);
         };
-
-
-        $scope.majors = [
-            'CS',
-            'IE',
-            'Math',
-            'EE',
-            'Business (lol)'
-        ];
 
         /*
          $scope.designations = [
@@ -61,8 +54,7 @@ angular.module('myAppControllers', ['myAppServices'])
             'Freshman',
             'Sophomore',
             'Junior',
-            'Senior',
-            'Never gonna leave'
+            'Senior'
         ];
 
         /*$scope.projects = [
@@ -105,34 +97,40 @@ angular.module('myAppControllers', ['myAppServices'])
 
     .controller('ProfileController', function ($scope, $http, profileService) {
         $scope.object = {};
-        $scope.object.dept = "College of Computing";
-
         $scope.getValues = function () {
             var profile = profileService.get();
             profile.then(function (res) {
                 if (res) {
                     $scope.object.major = res.data[0].Major;
-                    $scope.object.year = res.data[0].year;
+                    $scope.object.year = res.data[0].Year;
                     $scope.object.dept = res.data[0].Dept_name;
                 }
-            })
+            });
+
+            var majors = profileService.getMajors();
+            majors.then(function (res) {
+                if (res) {
+                    $scope.majors = res.data;
+                }
+            });
+
+
         };
 
         //Pull from DB when data entered
-        $scope.majors = [
-            'CS',
-            'IE',
-            'Math',
-            'EE',
-            'Business (lol)'
-        ];
+
+        $scope.updateDept = function () {
+            var object = $scope.object.major;
+            $scope.object.major = object.Name;
+            $scope.object.dept = object.Dept_name;
+        };
+
 
         $scope.years = [
             'Freshman',
             'Sophomore',
             'Junior',
-            'Senior',
-            'Never gonna leave'
+            'Senior'
         ];
 
         $scope.submit = function () {

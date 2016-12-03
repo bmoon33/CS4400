@@ -20,7 +20,7 @@
         $out["Category"][] = $row;
     }
 
-    $sql = "SELECT * FROM Major";
+    $sql = "SELECT Name FROM Major";
     $result = mysqli_query($conn, $sql);
 
     while ($row = mysqli_fetch_assoc($result)) {

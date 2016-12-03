@@ -1,12 +1,12 @@
 <?php
 
-	session_start();
+    session_start();
 	include_once("db.php");
 
 
     $user = $_SESSION['username'];
 
-    $sql = "SELECT Major, Year FROM User WHERE Username = 'mpittman5'";
+    $sql = "SELECT Major, Year FROM User WHERE Username = '$user'";
     $result = mysqli_query($conn, $sql);
     $out = array();
 

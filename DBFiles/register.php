@@ -27,7 +27,7 @@
     	exit();
     }
 
-    $sql = "INSERT INTO User (Username, Email, UserType) VALUES ('$user', '$email', 'Student')";
+    $sql = "INSERT INTO User (Username, Password, Email, UserType) VALUES ('$user', '$password', '$email', 'Student')";
     $result = mysqli_query($conn, $sql);
 
     if (!$result) {

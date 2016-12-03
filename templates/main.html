@@ -26,7 +26,7 @@
                     <ui-select-match>{{$select.selected}}
                     </ui-select-match>
                     <ui-select-choices repeat="major in majors| filter: $select.search">
-                        <div ng-bind-html="major | highlight: $select.search"></div>
+                        <div ng-bind-html="major.Name | highlight: $select.search"></div>
                     </ui-select-choices>
                 </ui-select>
             </div>
@@ -73,12 +73,12 @@
 
     <div class="row">
         <div class="col col-md-12">
-            <div class="btn-bar">
-                <label class="btn btn-primary " ng-model="object.radio" uib-btn-radio="'Project'">Project</label>
-                <label class="btn btn-primary " ng-model="object.radio" uib-btn-radio="'Course'">Course</label>
-                <label class="btn btn-primary" ng-model="object.radio" uib-btn-radio="'Both'">Both</label>
-                <p>{{object.radio}}</p>
-            </div>
+            <!--<div class="btn-bar">-->
+                <!--<label class="btn btn-primary " ng-model="object.radio" uib-btn-radio="'Project'">Project</label>-->
+                <!--<label class="btn btn-primary " ng-model="object.radio" uib-btn-radio="'Course'">Course</label>-->
+                <!--<label class="btn btn-primary" ng-model="object.radio" uib-btn-radio="'Both'">Both</label>-->
+                <!--<p>{{object.radio}}</p>-->
+            <!--</div>-->
 
             <div>
                 <form>
@@ -92,7 +92,6 @@
                     <label><input type="radio" ng-model="object.radio"
                                   value="Both"> Both</label>
                 </form>
-                <p>{{object.radio}}</p>
             </div>
             <br><br>
             <button class="btn btn-block btn-success">Apply Filter</button>
@@ -112,7 +111,7 @@
                         <th class="col-md-2"> Type</th>
 
                         </thead>
-                        <tr ng-repeat="project in projects">
+                        <tr ng-repeat="project in projects | orderBy:'Name'">
                             <td class="col-md-10">
                                 <a ui-sref="project({data: project.Name})">{{project.Name}}</a>
                             </td>

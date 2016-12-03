@@ -100,9 +100,13 @@ angular.module('myAppServices', [])
                             })
                         }
                     });
+            },
+            getMajors: function () {
+                return $http.get('DBFiles/getMajors.php');
             }
         }
     })
+
 
     .factory("projectService", function ($http) {
         return {
@@ -112,7 +116,7 @@ angular.module('myAppServices', [])
             updateLast: function (project) {
                 localStorage.setItem("project", project);
             },
-            get: function () {
+            getAll: function () {
                 return $http.get("DBFiles/getProjects.php");
             },
             getInfo: function (data) {

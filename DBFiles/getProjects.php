@@ -2,10 +2,7 @@
 
     include_once("db.php");
 
-
-
-
-    $sql = "SELECT *, 'Project' as Type FROM Project";
+    $sql = "SELECT Name, 'Project' as Type FROM Project";
     $result = mysqli_query($conn, $sql);
     $out = array();
 
@@ -13,13 +10,13 @@
         $out[] = $row;
     }
 
-    $sql = "SELECT *, 'Course' as Type FROM Course";
+
+    $sql = "SELECT Name, 'Course' as Type FROM Course";
     $result = mysqli_query($conn, $sql);
 
     while ($row = mysqli_fetch_assoc($result)) {
         $out[] = $row;
     }
-
 
 
     echo json_encode($out);

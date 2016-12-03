@@ -7,11 +7,11 @@
 
             <div class="form-group">
                 <label for="major"> Major </label>
-                <ui-select ng-model="object.major" theme="bootstrap" id="major">
+                <ui-select ng-model="object.major" theme="bootstrap" id="major" ng-change="updateDept()">
                     <ui-select-match>{{$select.selected}}
                     </ui-select-match>
                     <ui-select-choices repeat="major in majors| filter: $select.search">
-                        <div ng-bind-html="major | highlight: $select.search"></div>
+                        <div ng-bind-html="major.Name | highlight: $select.search"></div>
                     </ui-select-choices>
                 </ui-select>
             </div>

@@ -16,6 +16,5 @@
     }
 
     echo json_encode($out);
-    //echo $myArray;
 
 ?>
