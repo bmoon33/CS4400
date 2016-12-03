@@ -11,6 +11,10 @@ angular.module('myAppControllers', ['myAppServices'])
             $scope.getFilters();
         };
 
+        $scope.applyFilters = function () {
+            console.log($scope.object);
+        };
+
         $scope.getProjects = function () {
             var promise = projectService.getAll();
             promise.then(function (res) {
@@ -27,10 +31,7 @@ angular.module('myAppControllers', ['myAppServices'])
             })
         };
 
-        $scope.isNavCollapsed = false;
 
-        $scope.clicked = function () {
-        };
 
 
         $scope.years = [

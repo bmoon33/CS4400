@@ -1,4 +1,4 @@
-<div class="container-fluid" ng-init = "init()">
+<div class="container-fluid" ng-init="init()">
     <h2 style="text-align: center">Main Page </h2>
 
     <h3><a ui-sref="home">Home Page</a></h3>
@@ -23,7 +23,7 @@
             <div class="form-group">
                 <label for="major"> Major </label>
                 <ui-select ng-model="object.major" theme="bootstrap" id="major">
-                    <ui-select-match>{{$select.selected}}
+                    <ui-select-match>{{$select.selected.Name}}
                     </ui-select-match>
                     <ui-select-choices repeat="major in majors| filter: $select.search">
                         <div ng-bind-html="major.Name | highlight: $select.search"></div>
@@ -47,11 +47,11 @@
         <div class="col col-md-6">
             <div class="col col-md-8">
                 <div class="form-group">
-                    <label for="category"> Category </label>
-                    <ui-select ng-model="object.category" theme="bootstrap" id="category">
-                        <ui-select-match>{{$select.selected.Name}}
+                    <label for="category"> Categories</label>
+                    <ui-select multiple ng-model="object.category" theme="bootstrap" id="category">
+                        <ui-select-match>{{$item.Name}}
                         </ui-select-match>
-                        <ui-select-choices repeat="category in categories| filter: {Name: $select.search}">
+                        <ui-select-choices repeat="category in categories| filter: $select.search">
                             <div ng-bind-html="category.Name | highlight: $select.search"></div>
                         </ui-select-choices>
                     </ui-select>
@@ -74,10 +74,10 @@
     <div class="row">
         <div class="col col-md-12">
             <!--<div class="btn-bar">-->
-                <!--<label class="btn btn-primary " ng-model="object.radio" uib-btn-radio="'Project'">Project</label>-->
-                <!--<label class="btn btn-primary " ng-model="object.radio" uib-btn-radio="'Course'">Course</label>-->
-                <!--<label class="btn btn-primary" ng-model="object.radio" uib-btn-radio="'Both'">Both</label>-->
-                <!--<p>{{object.radio}}</p>-->
+            <!--<label class="btn btn-primary " ng-model="object.radio" uib-btn-radio="'Project'">Project</label>-->
+            <!--<label class="btn btn-primary " ng-model="object.radio" uib-btn-radio="'Course'">Course</label>-->
+            <!--<label class="btn btn-primary" ng-model="object.radio" uib-btn-radio="'Both'">Both</label>-->
+            <!--<p>{{object.radio}}</p>-->
             <!--</div>-->
 
             <div>
@@ -94,7 +94,7 @@
                 </form>
             </div>
             <br><br>
-            <button class="btn btn-block btn-success">Apply Filter</button>
+            <button class="btn btn-block btn-success" ng-click="applyFilters()">Apply Filter</button>
             <button class="btn btn-block btn-warning">Reset Filter</button>
         </div>
     </div>
