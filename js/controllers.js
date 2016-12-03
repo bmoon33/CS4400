@@ -4,9 +4,9 @@
 angular.module('myAppControllers', ['myAppServices'])
 
     .controller('MainPageController', function ($scope, projectService, mainPageService) {
-        $scope.object = {};
 
         $scope.init = function () {
+            $scope.object = {};
             $scope.getProjects();
             $scope.getFilters();
         };
