@@ -1,25 +1,65 @@
 <div class="container-fluid" ng-init="init()">
 
+    <h3><a ui-sref="home">Home Page</a></h3>
 
-    <h2>
-        <b>Project Name:</b> {{project.Name}}
-    </h2>
+    <div ng-if="!bool && bool != null">
 
-    <p>
-        <b>Description: </b>{{project.Description}}
-    </p>
-    <p>
-        <b>Advisor name:</b> {{project.Advisor_name}}
-    </p>
-    <p>
-        <b>Advisor email:</b> {{project.Advisor_email}}
-    </p>
-    <p>
-        <b>Designation:</b> {{project.Designation_name}}
-    </p>
-    <p>
-       <b> # of students: </b> {{project.Estimated_Num_of_Students}}
-    </p>
+        <h2>
+            <b>Project Name:</b> {{project.Name}}
+        </h2>
+
+        <p>
+            <b>Description: </b>{{project.Description}}
+        </p>
+        <p>
+            <b>Advisor name:</b> {{project.Advisor_name}}
+        </p>
+        <p>
+            <b>Advisor email:</b> {{project.Advisor_email}}
+        </p>
+        <p>
+            <b>Designation:</b> {{project.Designation_name}}
+        </p>
+        <p>
+            <b>Category:</b> {{project.categories}}
+        </p>
+        <p>
+            <b>Requirements:</b> {{project.requirements}}
+        </p>
+        <p>
+            <b> # of students: </b> {{project.Estimated_Num_of_Students}}
+        </p>
+
+        <button class="btn btn-primary" ng-click="apply(project)">
+            Apply
+        </button>
+    </div>
+
+    <div ng-if="bool && bool != null">
+        <h1>
+            {{course.Course_number}}
+        </h1>
+
+        <p>
+            <b>Course Name:</b> {{course.Name}}
+        </p>
+
+        <p>
+            <b>Instructor:</b> {{course.Instructor}}
+        </p>
+
+        <p>
+            <b>Designation:</b> {{course.Designation_name}}
+        </p>
+
+        <p>
+            <b>Category:</b> {{course.categories}}
+        </p>
+
+        <p>
+            <b># of students:</b> {{course.Est_Num_Students}}
+        </p>
+    </div>
 
 
 </div>

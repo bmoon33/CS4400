@@ -1,4 +1,4 @@
-<div class="container-fluid" title="Me">
+<div class="container-fluid" title="Me" ng-init="init()">
     <br>
 
     <div align="center">
@@ -18,10 +18,10 @@
                         <th class="col-md-2"> Status</th>
 
                         </thead>
-                        <tr ng-repeat="app in apps">
-                            <td class="col-md-2">{{app.date}}</td>
-                            <td class="col-md-8">{{app.name}}</td>
-                            <td class="col-md-2">{{app.status}}</td>
+                        <tr ng-repeat="app in apps | orderBy:'Date'">
+                            <td class="col-md-2">{{app.Date}}</td>
+                            <td class="col-md-8">{{app.Project_name}}</td>
+                            <td class="col-md-2">{{app.Status}}</td>
                         </tr>
                     </table>
                 </div>

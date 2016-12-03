@@ -14,7 +14,6 @@ angular.module('myAppControllers', ['myAppServices'])
         $scope.getProjects = function () {
             var promise = projectService.getAll();
             promise.then(function (res) {
-                console.log("projects: " + res.data);
                 $scope.projects = res.data;
             })
         };
@@ -25,30 +24,14 @@ angular.module('myAppControllers', ['myAppServices'])
                 $scope.categories = res.data.Category;
                 $scope.designations = res.data.Designation;
                 $scope.majors = res.data.Major;
-                console.log(res.data.Major);
-                // $scope.majors = res.data.Major;
             })
         };
 
         $scope.isNavCollapsed = false;
 
         $scope.clicked = function () {
-            console.log($scope.object);
         };
 
-        /*
-         $scope.designations = [
-         'Sustainable Communities',
-         'Community'
-
-         ];
-
-         $scope.categories = [
-         'Category 1',
-         'Category 2',
-         'Category 3',
-         'Category 4'
-         ];*/
 
         $scope.years = [
             'Freshman',
@@ -57,17 +40,7 @@ angular.module('myAppControllers', ['myAppServices'])
             'Senior'
         ];
 
-        /*$scope.projects = [
-         {name: 'Project 1', type: 'Course'},
-         {name: 'Project 2', type: 'Course'},
-         {name: 'Project 3', type: 'Project'},
-         {name: 'Project 4', type: 'Project'},
-         {name: 'Project 5', type: 'Course'},
-         {name: 'Project 6', type: 'Project'},
-         {name: 'Project 7', type: 'Course'},
-         {name: 'Project 8', type: 'Course'},
-         {name: 'Project 9', type: 'Project'}
-         ]*/
+
     })
 
     .controller('RegistrationController', function ($scope, $http, loginService) {
@@ -144,34 +117,102 @@ angular.module('myAppControllers', ['myAppServices'])
         //    Functionality for "Me" page if needed
     })
 
-    .controller('MyApplicationController', function ($scope) {
-        $scope.apps = [
-            {date: '10/14/2016', name: 'Project 1', status: 'Approved'},
-            {date: '11/24/2016', name: 'Project 2', status: 'Pending'},
-            {date: '1/7/2015', name: 'Project 3', status: 'Approved'},
-            {date: '8/3/2014', name: 'Project 4', status: 'Approved'},
-            {date: '4/25/2015', name: 'Project 5', status: 'Rejected'},
-            {date: '6/11/2016', name: 'Project 6', status: 'Pending'}
-
-        ]
+    .controller('MyApplicationController', function ($scope, myApplicationService) {
+        $scope.init = function () {
+            var myApps = myApplicationService.getApps();
+            myApps.then(function (res) {
+                console.log(res);
+                $scope.apps = res.data;
+            })
+        };
     })
 
     .controller('ProjectController', function ($scope, $stateParams, projectService) {
         if ($stateParams.data != null) {
             $scope.data = $stateParams.data;
+            $scope.bool = $scope.data.Type == 'Course'; //True if type is course, false if project
             projectService.updateLast($stateParams.data);
         } else {
             $scope.data = projectService.getLast();
+            $scope.bool = $scope.data.Type == 'Course';
         }
 
         $scope.init = function () {
-            var data = {name: $scope.data};
-            console.log(data);
-            var promise = projectService.getInfo(data);
+            $scope.project = {};
+            $scope.course = {};
+            var promise;
+            promise = projectService.getInfo($scope.data);
             promise.then(function (res) {
-                $scope.project = res.data[0];
-                console.log($scope.project);
-            })
+                if (!$scope.bool) {
+                    $scope.project = res.data[0];
+                    var appStatus = projectService.checkStatus($scope.data);
+                    appStatus.then(function (res) {
+                        console.log(res.data);
+                        $scope.status = res.data;
+                    });
+                } else {
+                    $scope.course = res.data[0];
+                }
+            });
+
+            var categories = projectService.getCategories($scope.data);
+            categories.then(function (res) {
+                var cat = '';
+                for (var i = 0; i < res.data.length; i++) {
+                    if (i == res.data.length - 1) {
+                        cat += res.data[i].Category_name;
+                    } else {
+                        cat += res.data[i].Category_name + ', ';
+                    }
+                }
+                if (!$scope.bool) {
+                    $scope.project.categories = cat;
+                } else {
+                    $scope.course.categories = cat;
+                }
+            });
+
+            if (!$scope.bool) {
+                var restrictions = projectService.getRequirements($scope.data);
+                restrictions.then(function (res) {
+                    var str = '';
+                    for (var i = 0; i < res.data.length; i++) {
+                        if (i == res.data.length - 1) {
+                            str += res.data[i].Requirement;
+                        } else {
+                            str += res.data[i].Requirement + ', ';
+                        }
+                    }
+                    $scope.project.requirements = str;
+                })
+            }
+
+        };
+
+        $scope.apply = function (data) {
+            console.log(data);
+            if ($scope.status == 'reject') {
+                swal({
+                    title: "Cannot apply again!",
+                    text: "You were previously rejected for this project. Sorry!",
+                    type: "warning"
+                })
+            } else if($scope.status == 'accept') {
+                swal({
+                    title: "Cannot apply again!",
+                    text: "You have already been accepted! Congratulations :)",
+                    type: "warning"
+                })
+            } else if ($scope.status == 'pending') {
+                swal({
+                    title: "Cannot apply again!",
+                    text: "Your application is pending. We will get back to you as soon as possible!",
+                    type: "warning"
+                })
+            } else {
+                projectService.apply(data);
+                $scope.status = 'pending';
+            }
         }
     })
 

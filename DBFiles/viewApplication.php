@@ -6,7 +6,8 @@
 
     //$user = $_SESSION['username'];
 
-    $sql = "SELECT Applications.ProjectName, Applications.Status, Students.year, Students.MajorName FROM Applications JOIN Students ON Applications.GTemail = Students.GTemail";
+    $sql = "SELECT Applications.ProjectName, Applications.Status, Students.year, Students.MajorName 
+            FROM Applications JOIN Students ON Applications.GTemail = Students.GTemail";
     $result = mysqli_query($conn, $sql);
     $out = array();
 

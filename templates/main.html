@@ -113,7 +113,7 @@
                         </thead>
                         <tr ng-repeat="project in projects | orderBy:'Name'">
                             <td class="col-md-10">
-                                <a ui-sref="project({data: project.Name})">{{project.Name}}</a>
+                                <a ui-sref="project({data: project})">{{project.Name}}</a>
                             </td>
                             <td class="col-md-2">{{project.Type}}</td>
 

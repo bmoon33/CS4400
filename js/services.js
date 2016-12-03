@@ -110,21 +110,73 @@ angular.module('myAppServices', [])
 
     .factory("projectService", function ($http) {
         return {
+            apply: function (data) {
+                $http({
+                    method: 'POST',
+                    url: 'DBFiles/apply.php',
+                    data: data
+                })
+                    .then(function (res) {
+                        console.log(res);
+                        if (res.data) {
+                            swal({
+                                title: "Error",
+                                text: "Please try again",
+                                type: "error"
+                            })
+                        } else {
+                            swal({
+                                title: "Successfully Applied!",
+                                text: "An admin will review your application and make a decision.",
+                                type: "success"
+                            })
+                        }
+                    });
+
+            },
             getLast: function () {
-                return localStorage.getItem("project");
+                var out = {};
+                out.Name = localStorage.getItem("name");
+                out.Type = localStorage.getItem("type");
+                return out;
             },
             updateLast: function (project) {
-                localStorage.setItem("project", project);
+                console.log(project);
+                var type = project.Type;
+                var name = project.Name;
+                localStorage.setItem("name", name);
+                localStorage.setItem("type", type);
             },
             getAll: function () {
                 return $http.get("DBFiles/getProjects.php");
             },
+            getCategories: function (data) {
+                return $http({
+                    method: 'POST',
+                    url: 'DBFiles/getCategories.php',
+                    data: data
+                })
+            },
+            getRequirements: function (data) {
+                return $http({
+                    method: 'POST',
+                    url: 'DBFiles/getRequirements.php',
+                    data: data
+                })
+            },
             getInfo: function (data) {
                 return $http({
                     method: 'POST',
-                    url: 'DBFiles/getProjectInfo.php',
+                    url: 'DBFiles/getProjDetails.php',
                     data: data
-                });
+                })
+            },
+            checkStatus: function (data) {
+                return $http({
+                    method: 'POST',
+                    url: 'DBFiles/getProjectAppDetails.php',
+                    data: data
+                })
             }
         }
     })
@@ -133,6 +185,14 @@ angular.module('myAppServices', [])
         return {
             getFilters: function () {
                 return $http.get("DBFiles/getFilters.php");
+            }
+        }
+    })
+
+    .factory("myApplicationService", function ($http) {
+        return {
+            getApps: function () {
+                return $http.get("DBFiles/getMyApps.php");
             }
         }
     })
