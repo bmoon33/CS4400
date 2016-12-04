@@ -1,6 +1,6 @@
 <?php
 
-    include_once("db.php");
+    include_once("../authentication/db.php");
     mysqli_set_charset($conn, 'utf8');
 
     $jsonText = file_get_contents('php://input');

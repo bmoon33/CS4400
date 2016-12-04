@@ -53,11 +53,10 @@
         }
 
         return ($deptBool || $majorBool) && $yearBool;
-
     }
 
     session_start();
-    include_once("db.php");
+    include_once("../authentication/db.php");
 
     $user = $_SESSION['username'];
 

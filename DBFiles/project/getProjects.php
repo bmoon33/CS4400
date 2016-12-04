@@ -1,6 +1,6 @@
 <?php
 
-    include_once("db.php");
+    include_once("../authentication/db.php");
 
     $sql = "SELECT Name, 'Project' as Type FROM Project";
     $result = mysqli_query($conn, $sql);

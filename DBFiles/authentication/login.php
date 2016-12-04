@@ -14,6 +14,9 @@
     $count = mysqli_num_rows($result);
 
    if ($count > 0) {
+
+
+        $out = mysqli_fetch_assoc($result);
         $_SESSION['username'] = $user;
         session_write_close();
         print uniqid('ang_', true);

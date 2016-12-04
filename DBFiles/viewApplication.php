@@ -1,14 +1,15 @@
 <?php
 
 	session_start();
-	include_once("db.php");
+	include_once("authentication/db.php");
 
 
     //$user = $_SESSION['username'];
 
-    $sql = "SELECT Applications.ProjectName, Applications.Status, Students.year, Students.MajorName 
-            FROM Applications JOIN Students ON Applications.GTemail = Students.GTemail";
-    $result = mysqli_query($conn, $sql);
+    $sql = "SELECT Apply.Project_name, Apply.Status, User.Year, User.Major 
+            FROM Apply JOIN User ON Apply.Student_name = User.Username";
+    // $sql = "SELECT * FROM User WHERE Username = 'nroy45'";
+    $result = mysqli_query($conn, $sql) or die("Can't connect");
     $out = array();
 
     while ($row = mysqli_fetch_assoc($result)) {

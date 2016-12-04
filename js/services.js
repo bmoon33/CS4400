@@ -8,7 +8,7 @@ angular.module('myAppServices', [])
             login: function (data) {
                 $http({
                     method: 'POST',
-                    url: 'DBFiles/login.php',
+                    url: 'DBFiles/authentication/login.php',
                     data: data
                 })
                     .then(function (res) {
@@ -25,18 +25,18 @@ angular.module('myAppServices', [])
                     });
             },
             logout: function () {
-                $http.post('DBFiles/destroySession.php')
+                $http.post('DBFiles/authentication/destroySession.php')
                     .then(function () {
                         $state.transitionTo('login');
                     });
             },
             loggedIn: function () {
-                return $http.post('DBFiles/auth.php');
+                return $http.post('DBFiles/authentication/auth.php');
             },
             register: function (data) {
                 $http({
                     method: 'POST',
-                    url: 'DBFiles/register.php',
+                    url: 'DBFiles/authentication/register.php',
                     data: data
                 })
                     .then(function (res) {
@@ -77,12 +77,12 @@ angular.module('myAppServices', [])
     .factory("profileService", function ($http) {
         return {
             get: function () {
-                return $http.get('DBFiles/getProfile.php');
+                return $http.get('DBFiles/user/getProfile.php');
             },
             update: function (data) {
                 $http({
                     method: 'POST',
-                    url: 'DBFiles/editProfile.php',
+                    url: 'DBFiles/user/editProfile.php',
                     data: data
                 })
                     .then(function (res) {
@@ -102,7 +102,7 @@ angular.module('myAppServices', [])
                     });
             },
             getMajors: function () {
-                return $http.get('DBFiles/getMajors.php');
+                return $http.get('DBFiles/user/getMajors.php');
             }
         }
     })
@@ -113,7 +113,7 @@ angular.module('myAppServices', [])
             apply: function (data) {
                 return $http({
                     method: 'POST',
-                    url: 'DBFiles/apply.php',
+                    url: 'DBFiles/project/apply.php',
                     data: data
                 })
                     .then(function (res) {
@@ -157,33 +157,33 @@ angular.module('myAppServices', [])
                 localStorage.setItem("type", type);
             },
             getAll: function () {
-                return $http.get("DBFiles/getProjects.php");
+                return $http.get("DBFiles/project/getProjects.php");
             },
             getCategories: function (data) {
                 return $http({
                     method: 'POST',
-                    url: 'DBFiles/getCategories.php',
+                    url: 'DBFiles/project/getCategories.php',
                     data: data
                 })
             },
             getRequirements: function (data) {
                 return $http({
                     method: 'POST',
-                    url: 'DBFiles/getRequirements.php',
+                    url: 'DBFiles/project/getRequirements.php',
                     data: data
                 })
             },
             getInfo: function (data) {
                 return $http({
                     method: 'POST',
-                    url: 'DBFiles/getProjDetails.php',
+                    url: 'DBFiles/project/getProjDetails.php',
                     data: data
                 })
             },
             checkStatus: function (data) {
                 return $http({
                     method: 'POST',
-                    url: 'DBFiles/getProjectAppDetails.php',
+                    url: 'DBFiles/project/getProjectAppDetails.php',
                     data: data
                 })
             }
@@ -193,12 +193,12 @@ angular.module('myAppServices', [])
     .factory("mainPageService", function ($http) {
         return {
             getFilters: function () {
-                return $http.get("DBFiles/getFilters.php");
+                return $http.get("DBFiles/project/getFilters.php");
             },
             applyFilters: function (data) {
                 return $http({
                     method: 'POST',
-                    url: 'DBFiles/applyFilters.php',
+                    url: 'DBFiles/project/applyFilters.php',
                     data: data
                 })
             }
@@ -208,7 +208,7 @@ angular.module('myAppServices', [])
     .factory("myApplicationService", function ($http) {
         return {
             getApps: function () {
-                return $http.get("DBFiles/getMyApps.php");
+                return $http.get("DBFiles/user/getMyApps.php");
             }
         }
     })
