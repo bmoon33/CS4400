@@ -180,5 +180,11 @@ angular.module('myApp', ['ui.router', 'ui.bootstrap', 'myAppControllers', 'ngSan
         }
     })
 
+    .filter('percent', function() {
+        return function(input) {
+            return parseFloat(input, 10) * 100;
+        };
+    });
+
 
 ;

@@ -13,14 +13,14 @@
                         <thead>
                         <th class="col-md-4"> Project</th>
                         <th class="col-md-2"> # of Applicants</th>
-                        <th class="col-md-2"> Acceptance Rate</th>
+                        <th class="col-md-2"> Acceptance Rate (%)</th>
                         <th class="col-md-4"> Top 3 Majors</th>
 
                         </thead>
                         <tr ng-repeat="report in reports | orderBy:'-AcceptPercent'">
                             <td class="col-md-4">{{report.Name}}</td>
                             <td class="col-md-2">{{report.AppCount}}</td>
-                            <td class="col-md-2">{{report.AcceptPercent}}</td>
+                            <td class="col-md-2">{{report.AcceptPercent | percent}} </td>
                             <td class="col-md-2">{{report.Major}}</td>
                         </tr>
                     </table>

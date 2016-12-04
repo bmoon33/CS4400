@@ -316,7 +316,13 @@ angular.module('myAppServices', [])
                                 title: "Error",
                                 text: "Please try again",
                                 type: "error"
-                            })
+                            });
+                        } else {
+                            swal({
+                                title: "Success",
+                                text: "New project has been created",
+                                type: "success"
+                            });
                         }
                     })
             },
@@ -332,7 +338,13 @@ angular.module('myAppServices', [])
                                 title: "Error",
                                 text: "Please try again",
                                 type: "error"
-                            })
+                            });
+                        } else {
+                            swal({
+                                title: "Success",
+                                text: "New course has been created",
+                                type: "success"
+                            });
                         }
                     })
             },

@@ -13,11 +13,9 @@ angular.module('myAppControllers', ['myAppServices'])
         };
 
         $scope.applyFilters = function () {
-            console.log($scope.object);
             var promise = mainPageService.applyFilters($scope.object);
             promise.then(function (res) {
                 $scope.projects = res.data;
-                console.log(res);
             });
         };
 
@@ -126,7 +124,6 @@ angular.module('myAppControllers', ['myAppServices'])
         $scope.init = function () {
             var myApps = myApplicationService.getApps();
             myApps.then(function (res) {
-                console.log(res);
                 $scope.apps = res.data;
             })
         };
@@ -141,10 +138,8 @@ angular.module('myAppControllers', ['myAppServices'])
             promise.then(function (res) {
                 if (!$scope.bool) {
                     $scope.project = res.data[0];
-                    console.log(res);
                     var appStatus = projectService.checkStatus($scope.data);
                     appStatus.then(function (res) {
-                        console.log(res.data);
                         $scope.status = res.data;
                     });
                 } else {
@@ -237,7 +232,6 @@ angular.module('myAppControllers', ['myAppServices'])
         $scope.init = function () {
             var promise = adminService.viewApps();
             promise.then(function (res) {
-                console.log(res);
                 $scope.apps = res.data;
             })
         };
@@ -254,7 +248,6 @@ angular.module('myAppControllers', ['myAppServices'])
             var object = adminService.getLastApp();
             adminService.getAppDetails(object)
                 .then(function (res) {
-                    console.log(res);
                     $scope.app = res.data[0];
                     $scope.bool = $scope.app.Status == 'Pending';
                 });
@@ -265,7 +258,6 @@ angular.module('myAppControllers', ['myAppServices'])
                 var val = adminService.accept(app);
                 val.then(function (res) {
                     if (res) {
-                        console.log(res);
                         $scope.app.Status = 'Accepted';
                     }
                 })
@@ -283,7 +275,6 @@ angular.module('myAppControllers', ['myAppServices'])
                 var val = adminService.reject(app);
                 val.then(function (res) {
                     if (res) {
-                        console.log(res);
                         $scope.app.Status = 'Rejected';
                     }
                 })
@@ -311,13 +302,11 @@ angular.module('myAppControllers', ['myAppServices'])
         $scope.init = function () {
             var promise = adminService.getAppReport();
             promise.then(function (res) {
-                console.log(res);
                 $scope.reports = res.data;
             });
 
             var headerPromise = adminService.getAppReportHeader();
             headerPromise.then(function (res) {
-                console.log(res);
                 $scope.header = res.data;
             });
         }
@@ -344,7 +333,6 @@ angular.module('myAppControllers', ['myAppServices'])
         };
 
         $scope.addProject = function (data) {
-            console.log(data);
             adminService.addProject(data);
         }
     })
