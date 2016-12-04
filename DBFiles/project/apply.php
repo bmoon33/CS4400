@@ -52,7 +52,7 @@
             $deptBool = trim($userDept) == trim(substr($deptReq, 0, $pos));
         }
 
-        return ($deptBool || $majorBool) && $yearBool;
+        return $deptBool && $majorBool && $yearBool;
     }
 
     session_start();

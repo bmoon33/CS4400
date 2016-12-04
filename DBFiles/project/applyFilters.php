@@ -41,6 +41,16 @@
         }
 
         if ($major) {
+
+            $deptsql = "SELECT Dept_name FROM Major WHERE Name = '$major'";
+
+            $temparr = array();
+            $tempresult = mysqli_query($conn, $deptsql);
+            $temparr = mysqli_fetch_assoc($tempresult);
+            $deptReq = $temparr["Dept_name"];
+
+
+            $major = "'" . $major ." students only', 'no major requirement for this project'";
             if ($first) {
                 $first = False;
                 $sql .= "WHERE Major_requirement IN ($major) ";
@@ -49,7 +59,18 @@
             }
         }
 
+        if ($deptReq) {
+            $deptReq = "'" . $deptReq ." students only', 'no department requirement for this project'";
+            if ($first) {
+                $first = False;
+                $sql .= "WHERE Department_requirement IN ($deptReq) ";
+            } else {
+                $sql .= "AND Department_requirement IN ($deptReq) ";
+            }
+        }
+
         if ($year) {
+            $year = "'" . $year ." students only', 'no year requirement for this project'";
             if ($first) {
                 $first = False;
                 $sql .= "WHERE Year_requirement IN ($year) ";
@@ -64,7 +85,7 @@
         while ($row = mysqli_fetch_assoc($result)) {
             $out[] = $row;
         }
-
+        echo $sql;
 
     }
 
@@ -134,12 +155,7 @@
 
     $categories = implode("','",$categories);
 
-    if ($major) {
-        $major = "'" . $major ." students only', 'no major requirement for this project'";
-    } 
-    if ($year) {
-        $year = "'" . $year ." students only', 'no year requirement for this project'";;
-    }
+
 
     $out = array();
 
@@ -157,6 +173,6 @@
         getCourses($title, $Dname, $categories, $major, $year, $conn, $out);
     }
 
-    echo json_encode($out);
+    // echo json_encode($out);
 
 ?>
