@@ -7,6 +7,7 @@ angular.module('myAppControllers', ['myAppServices'])
 
         $scope.init = function () {
             $scope.object = {};
+            $scope.object.filterType = 'Both';
             $scope.getProjects();
             $scope.getFilters();
         };
@@ -40,10 +41,10 @@ angular.module('myAppControllers', ['myAppServices'])
 
 
         $scope.years = [
-            'Freshman',
-            'Sophomore',
-            'Junior',
-            'Senior'
+            'freshman',
+            'sophomore',
+            'junior',
+            'senior'
         ];
 
 

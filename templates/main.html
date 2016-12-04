@@ -12,7 +12,7 @@
             <div class="form-group">
                 <label for="designation"> Designation </label>
                 <ui-select ng-model="object.designation" theme="bootstrap" id="designation">
-                    <ui-select-match>{{$select.selected.Name}}
+                    <ui-select-match allow-clear="true">{{$select.selected.Name}}
                     </ui-select-match>
                     <ui-select-choices repeat="designation in designations | filter: {Name: $select.search}">
                         <div ng-bind-html="designation.Name | highlight: $select.search"></div>
@@ -26,7 +26,7 @@
             <div class="form-group">
                 <label for="major"> Major </label>
                 <ui-select ng-model="object.major" theme="bootstrap" id="major">
-                    <ui-select-match>{{$select.selected.Name}}
+                    <ui-select-match allow-clear="true">{{$select.selected.Name}}
                     </ui-select-match>
                     <ui-select-choices repeat="major in majors| filter: $select.search">
                         <div ng-bind-html="major.Name | highlight: $select.search"></div>
@@ -37,10 +37,10 @@
             <div class="form-group">
                 <label for="year"> Year </label>
                 <ui-select ng-model="object.year" theme="bootstrap" id="year">
-                    <ui-select-match>{{$select.selected}}
+                    <ui-select-match allow-clear="true">{{$select.selected | capitalize}}
                     </ui-select-match>
                     <ui-select-choices repeat="year in years| filter: $select.search">
-                        <div ng-bind-html="year | highlight: $select.search"></div>
+                        <div ng-bind-html="year | highlight: $select.search | capitalize"></div>
                     </ui-select-choices>
                 </ui-select>
             </div>
@@ -55,7 +55,7 @@
             <div class="form-group">
                 <label for="category"> Categories</label>
                 <ui-select multiple ng-model="object.category" theme="bootstrap" id="category">
-                    <ui-select-match>{{$item.Name}}
+                    <ui-select-match allow-clear="true">{{$item.Name}}
                     </ui-select-match>
                     <ui-select-choices repeat="category in categories| filter: $select.search">
                         <div ng-bind-html="category.Name | highlight: $select.search"></div>
@@ -77,13 +77,13 @@
             <div>
                 <form>
                     <label>
-                        <input type="radio" ng-model="object.radio"
+                        <input type="radio" ng-model="object.filterType"
                                value="Project"> Project
                     </label>
 
-                    <label><input type="radio" ng-model="object.radio"
+                    <label><input type="radio" ng-model="object.filterType"
                                   value="Course"> Course</label>
-                    <label><input type="radio" ng-model="object.radio"
+                    <label><input type="radio" ng-model="object.filterType"
                                   value="Both"> Both</label>
                 </form>
             </div>
