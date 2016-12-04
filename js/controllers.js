@@ -262,7 +262,13 @@ angular.module('myAppControllers', ['myAppServices'])
 
         $scope.accept = function (app) {
             if ($scope.bool) {
-                adminService.accept(app);
+                var val = adminService.accept(app);
+                val.then(function (res) {
+                    if (res) {
+                        console.log(res);
+                        $scope.app.Status = 'Accepted';
+                    }
+                })
             } else {
                 swal({
                     title: "Error",
@@ -274,7 +280,13 @@ angular.module('myAppControllers', ['myAppServices'])
 
         $scope.reject = function (app) {
             if ($scope.bool) {
-                adminService.reject(app);
+                var val = adminService.reject(app);
+                val.then(function (res) {
+                    if (res) {
+                        console.log(res);
+                        $scope.app.Status = 'Rejected';
+                    }
+                })
             } else {
                 swal({
                     title: "Error",
@@ -299,6 +311,7 @@ angular.module('myAppControllers', ['myAppServices'])
         $scope.init = function () {
             var promise = adminService.getAppReport();
             promise.then(function (res) {
+                console.log(res);
                 $scope.reports = res.data;
             });
 

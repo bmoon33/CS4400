@@ -140,7 +140,7 @@ angular.module('myApp', ['ui.router', 'ui.bootstrap', 'myAppControllers', 'ngSan
                 loginService.admin()
                     .then(function (msg) {
                         if (msg.data) {
-                            $state.transitionTo(fromState.name);
+                            $state.transitionTo('homeAdmin');
                         } else {
                             loginService.loggedIn()
                                 .then(function (msg) {

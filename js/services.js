@@ -247,7 +247,7 @@ angular.module('myAppServices', [])
                 })
             },
             accept: function (data) {
-                $http({
+                return $http({
                     method: 'POST',
                     url: 'DBFiles/admin/acceptApp.php',
                     data: data
@@ -258,12 +258,20 @@ angular.module('myAppServices', [])
                                 title: "Error",
                                 text: "Please try again",
                                 type: "error"
-                            })
+                            });
+                            return false;
+                        } else {
+                            swal({
+                                title: "Accepted",
+                                text: "Application has been accepted!",
+                                type: "success"
+                            });
+                            return true;
                         }
                     })
             },
             reject: function (data) {
-                $http({
+                return $http({
                     method: 'POST',
                     url: 'DBFiles/admin/rejectApp.php',
                     data: data
@@ -274,7 +282,15 @@ angular.module('myAppServices', [])
                                 title: "Error",
                                 text: "Please try again",
                                 type: "error"
-                            })
+                            });
+                            return false;
+                        } else {
+                            swal({
+                                title: "Rejected",
+                                text: "Application has been rejected!",
+                                type: "success"
+                            });
+                            return true;
                         }
                     })
             },
