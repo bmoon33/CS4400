@@ -160,7 +160,14 @@ angular.module('myApp', ['ui.router', 'ui.bootstrap', 'myAppControllers', 'ngSan
                 loginService.admin()
                     .then(function (msg) {
                         if (!msg.data) {
-                            $state.transitionTo(fromState.name);
+                            loginService.loggedIn()
+                                .then(function (msg2) {
+                                    if (!msg2.data) {
+                                        $state.transitionTo('login');
+                                    } else {
+                                        $state.transitionTo('home');
+                                    }
+                                });
                         }
                     });
             }
@@ -180,8 +187,8 @@ angular.module('myApp', ['ui.router', 'ui.bootstrap', 'myAppControllers', 'ngSan
         }
     })
 
-    .filter('percent', function() {
-        return function(input) {
+    .filter('percent', function () {
+        return function (input) {
             return parseFloat(input, 10) * 100;
         };
     });
