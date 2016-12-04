@@ -81,22 +81,17 @@
 
             </div>
 
-            <!--<div>-->
-                <!--<form>-->
-                    <!--<label>-->
-                        <!--<input type="radio" ng-model="object.filterType"-->
-                               <!--value="Project"> Project-->
-                    <!--</label>-->
-
-                    <!--<label><input type="radio" ng-model="object.filterType"-->
-                                  <!--value="Course"> Course</label>-->
-                    <!--<label><input type="radio" ng-model="object.filterType"-->
-                                  <!--value="Both"> Both</label>-->
-                <!--</form>-->
-            <!--</div>-->
             <br><br>
-            <button class="btn btn-block btn-success" ng-click="applyFilters()">Apply Filter</button>
-            <button class="btn btn-block btn-warning" ng-click="init()">Reset Filter</button>
+            <div class="row">
+                <div class="col-md-6">
+                    <button class="btn btn-block btn-success" ng-click="applyFilters()">Apply Filter</button>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-block btn-warning" ng-click="init()">Reset Filter</button>
+                </div>
+            </div>
+
+
             <button class="btn btn-primary btn-block" ng-click="goBack()">
                 Back
             </button>
