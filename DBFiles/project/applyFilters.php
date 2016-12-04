@@ -85,7 +85,7 @@
         while ($row = mysqli_fetch_assoc($result)) {
             $out[] = $row;
         }
-        echo $sql;
+// 
 
     }
 
@@ -173,6 +173,6 @@
         getCourses($title, $Dname, $categories, $major, $year, $conn, $out);
     }
 
-    // echo json_encode($out);
+    echo json_encode($out);
 
 ?>
