@@ -28,10 +28,17 @@
                        ng-pattern="emailFormat"
                        id="email" placeholder="Enter your Georgia Tech email" required>
 
-                <p ng-show="registration.email.$error.pattern && !registration.email.$pristine" class="help-block">
-                    Must use your Georgia Tech email
-                </p>
+                <div ng-show="registration.email.$error.pattern && !registration.email.$pristine" class="help-block">
 
+                    <p>
+                        Must use your Georgia Tech email:
+                    </p>
+                    <ul>
+                        <li>Start with a character</li>
+                        <li>May include characters, digits, periods or underscores</li>
+                        <li>@gatech.edu OR @&lt;subdomain&gt;.gatech.edu</li>
+                    </ul>
+                </div>
 
             </div>
 
@@ -79,11 +86,12 @@
             </div>
 
             <button type="submit" ng-disabled="registration.$invalid"
-                    class="btn btn-primary btn-block" ng-click="createUser()">Sign Up!
+                    class="btn btn-success btn-block" ng-click="createUser()">Sign Up!
             </button>
 
         </form>
 
+        <br>
         <button class="btn btn-primary btn-block" ng-click="goBack()">
             Back
         </button>
