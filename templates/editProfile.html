@@ -21,7 +21,7 @@
                 <ui-select ng-model="object.year" theme="bootstrap" id="year">
                     <ui-select-match>{{$select.selected}}
                     </ui-select-match>
-                    <ui-select-choices repeat="year in years| filter: $select.search">
+                    <ui-select-choices repeat="year in years| filter: $select.search | capitalize">
                         <div ng-bind-html="year | highlight: $select.search"></div>
                     </ui-select-choices>
                 </ui-select>
