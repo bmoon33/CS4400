@@ -37,7 +37,7 @@
 
 
     $sql = "INSERT INTO Course (Course_number, Name, Instructor, Designation_name, Est_Num_Students) 
-            VALUES ('$number', '$name', '$instructor', '$designation', '$studentcount')";
+            VALUES ('$number', '$name', '$instructor', '$designation', '$studentCount')";
     $result = mysqli_query($conn, $sql) or die ("error");
 
     foreach($myArray[0]["category"] as $key => $value) {
