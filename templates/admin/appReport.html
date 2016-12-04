@@ -17,7 +17,7 @@
                         <th class="col-md-4"> Top 3 Majors</th>
 
                         </thead>
-                        <tr ng-repeat="report in reports | orderBy:'-AcceptPercent'">
+                        <tr ng-repeat="report in reports | orderBy:['-AcceptPercent', '-AppCount']">
                             <td class="col-md-4">{{report.Name}}</td>
                             <td class="col-md-2">{{report.AppCount}}</td>
                             <td class="col-md-2">{{report.AcceptPercent | percent | number: 1}} </td>
