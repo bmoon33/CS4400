@@ -326,7 +326,6 @@ angular.module('myAppControllers', ['myAppServices'])
                 $scope.years = res.data.Year;
                 $scope.departments = res.data.Department;
                 $scope.majors.push({Name: 'no major requirement for this project'});
-                $scope.years.push({Name: 'no year requirement for this project'});
                 $scope.departments.push({Name: 'no department requirement for this project'});
                 $scope.project.major = {Name: 'no major requirement for this project'};
                 $scope.project.year = {Name: 'no year requirement for this project'};
