@@ -15,11 +15,15 @@
 
    if ($count > 0) {
 
-
         $out = mysqli_fetch_assoc($result);
         $_SESSION['username'] = $user;
+        if ($out["UserType"] == "Admin") {
+            $_SESSION['UserType'] = "Admin";
+        } else {
+            $_SESSION['UserType'] = "Student";
+        }
         session_write_close();
-        print uniqid('ang_', true);
+        echo $out["UserType"];
         exit();
    }
 

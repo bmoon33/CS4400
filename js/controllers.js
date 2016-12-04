@@ -38,8 +38,6 @@ angular.module('myAppControllers', ['myAppServices'])
         };
 
 
-
-
         $scope.years = [
             'freshman',
             'sophomore',
@@ -206,7 +204,7 @@ angular.module('myAppControllers', ['myAppServices'])
                     text: "You were previously rejected for this project. Sorry!",
                     type: "warning"
                 })
-            } else if($scope.status == 'accept') {
+            } else if ($scope.status == 'accept') {
                 swal({
                     title: "Cannot apply again!",
                     text: "You have already been accepted! Congratulations :)",
@@ -226,6 +224,89 @@ angular.module('myAppControllers', ['myAppServices'])
                     }
                 })
             }
+        }
+    })
+
+    .controller('AdminHomeController', function ($scope, loginService) {
+        $scope.logout = function () {
+            loginService.logout();
+        };
+    })
+
+    .controller('AdminViewAppsController', function ($scope, adminService) {
+        $scope.init = function () {
+            var promise = adminService.viewApps();
+            promise.then(function (res) {
+                console.log(res);
+                $scope.apps = res.data;
+            })
+        };
+
+
+    })
+
+    .controller('AdminAppController', function ($scope, adminService, $stateParams) {
+        if ($stateParams.data != null) {
+            $scope.app = $stateParams.data;
+            $scope.bool = $scope.app.Status == 'Pending';
+            adminService.updateLastApp($stateParams.data);
+        } else {
+            var object = adminService.getLastApp();
+            adminService.getAppDetails(object)
+                .then(function (res) {
+                    console.log(res);
+                    $scope.app = res.data[0];
+                    $scope.bool = $scope.app.Status == 'Pending';
+                });
+        }
+
+        $scope.accept = function (app) {
+            if ($scope.bool) {
+                adminService.accept(app);
+            } else {
+                swal({
+                    title: "Error",
+                    text: "Decision has already been made",
+                    type: "error"
+                })
+            }
+        };
+
+        $scope.reject = function (app) {
+            if ($scope.bool) {
+                adminService.reject(app);
+            } else {
+                swal({
+                    title: "Error",
+                    text: "Decision has already been made",
+                    type: "error"
+                })
+            }
+        }
+
+    })
+
+    .controller('AdminPopProjectController', function ($scope, adminService) {
+        $scope.init = function () {
+            var promise = adminService.getPopProjects();
+            promise.then(function (res) {
+                $scope.reports = res.data;
+            })
+        }
+    })
+
+    .controller('AdminAppReportController', function ($scope, adminService) {
+        $scope.init = function () {
+            var promise = adminService.getAppReport();
+            promise.then(function (res) {
+                $scope.reports = res.data;
+            });
+
+            var headerPromise = adminService.getAppReportHeader();
+            headerPromise.then(function (res) {
+                console.log(res);
+                $scope.header = res.data;
+            });
         }
     })
 

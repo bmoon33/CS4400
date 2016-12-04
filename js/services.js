@@ -14,7 +14,11 @@ angular.module('myAppServices', [])
                     .then(function (res) {
                         var uid = res.data;
                         if (uid) {
-                            $state.transitionTo('home');
+                            if (uid == 'Admin') {
+                                $state.transitionTo('homeAdmin');
+                            } else {
+                                $state.transitionTo('home');
+                            }
                         } else {
                             swal({
                                 title: "Access Denied",
@@ -27,11 +31,15 @@ angular.module('myAppServices', [])
             logout: function () {
                 $http.post('DBFiles/authentication/destroySession.php')
                     .then(function () {
+                        localStorage.clear();
                         $state.transitionTo('login');
                     });
             },
             loggedIn: function () {
                 return $http.post('DBFiles/authentication/auth.php');
+            },
+            admin: function () {
+                return $http.post('DBFiles/authentication/admin.php');
             },
             register: function (data) {
                 $http({
@@ -211,5 +219,75 @@ angular.module('myAppServices', [])
                 return $http.get("DBFiles/user/getMyApps.php");
             }
         }
+    })
+
+    .factory("adminService", function ($http) {
+        return {
+            viewApps: function () {
+                return $http.get("DBFiles/admin/viewApplication.php");
+            },
+            updateLastApp: function (data) {
+                var username = data.Username;
+                var appname = data.Name;
+                localStorage.setItem("username", username);
+                localStorage.setItem("appname", appname);
+            },
+            getLastApp: function () {
+                var object = {};
+                object.username = localStorage.getItem("username");
+                object.appname = localStorage.getItem("appname");
+                return object;
+            },
+            getAppDetails: function (data) {
+
+                return $http({
+                    method: 'POST',
+                    url: 'DBFiles/admin/getAppDetails.php',
+                    data: data
+                })
+            },
+            accept: function (data) {
+                $http({
+                    method: 'POST',
+                    url: 'DBFiles/admin/acceptApp.php',
+                    data: data
+                })
+                    .then(function (res) {
+                        if (res) {
+                            swal({
+                                title: "Error",
+                                text: "Please try again",
+                                type: "error"
+                            })
+                        }
+                    })
+            },
+            reject: function (data) {
+                $http({
+                    method: 'POST',
+                    url: 'DBFiles/admin/rejectApp.php',
+                    data: data
+                })
+                    .then(function (res) {
+                        if (res) {
+                            swal({
+                                title: "Error",
+                                text: "Please try again",
+                                type: "error"
+                            })
+                        }
+                    })
+            },
+            getPopProjects: function () {
+                return $http.get('DBFiles/admin/viewPopProject.php');
+            },
+            getAppReport: function () {
+                return $http.get('DBFiles/admin/viewApplicationReport.php');
+            },
+            getAppReportHeader: function () {
+                return $http.get('DBFiles/admin/appReportHeader.php');
+            }
+        }
+
     })
 ;

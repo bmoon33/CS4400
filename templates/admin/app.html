@@ -1,0 +1,43 @@
+<div class="container-fluid" ng-init="init()">
+
+    <div>
+
+        <h2>
+            <b>Project Name:</b> {{app.Name}}
+        </h2>
+
+        <p>
+            <b>Applicant Year: </b>{{app.Year}}
+        </p>
+        <p>
+            <b>Applicant Major:</b> {{app.Major}}
+        </p>
+        <p>
+            <b> Status:</b> {{app.Status}}
+        </p>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <button class="btn btn-success btn-block" ng-click="accept(app)">
+                    Accept
+                </button>
+            </div>
+
+            <div class="col-md-6">
+                <button class="btn btn-danger btn-block" ng-click="reject(app)">
+                    Reject
+                </button>
+            </div>
+        </div>
+
+        <br>
+
+
+        <button class="btn btn-primary btn-block" ng-click="goBack()">
+            Back
+        </button>
+    </div>
+
+
+</div>

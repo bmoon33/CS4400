@@ -10,12 +10,15 @@ angular.module('myAppDirectives', [])
 
                 var me = attrs.ngModel;
                 var matchTo = attrs.pwCheck;
-                scope.$watchGroup([me, matchTo], function(value){
-                    ctrl.$setValidity('pwmatch', value[0] === value[1] );
+                scope.$watchGroup([me, matchTo], function (value) {
+                    ctrl.$setValidity('pwmatch', value[0] === value[1]);
                 });
 
             }
         }
     }])
+
+
+
 
 ;

@@ -1,0 +1,32 @@
+<div class="container-fluid" ng-init="init()">
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="table-responsive">
+                    <table class="table table-condensed table-hover table-bordered table-striped" ts-wrapper>
+                        <thead>
+                        <th class="col-md-4"> Project</th>
+                        <th class="col-md-3"> Applicant Major</th>
+                        <th class="col-md-3"> Applicant Year</th>
+                        <th class="col-md-2"> Status</th>
+
+                        </thead>
+                        <tr ng-repeat="app in apps | orderBy:'Name'">
+                            <td class="col-md-4">
+                                <a ui-sref="appAdmin({data: app})">{{app.Name}}</a>
+                            </td>
+                            <td class="col-md-3">{{app.Major}}</td>
+                            <td class="col-md-3">{{app.Year}}</td>
+                            <td class="col-md-2">{{app.Status}}</td>
+
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-primary btn-block" ng-click="goBack()"> Back </button>
+    <br>
+</div>

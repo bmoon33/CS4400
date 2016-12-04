@@ -1,0 +1,25 @@
+<div class="container-fluid" ng-init="init()">
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="table-responsive">
+                    <table class="table table-condensed table-hover table-bordered table-striped" ts-wrapper>
+                        <thead>
+                        <th class="col-md-8"> Project</th>
+                        <th class="col-md-4"> # of Applicants</th>
+
+                        </thead>
+                        <tr ng-repeat="report in reports | orderBy:'-AppCount'">
+                            <td class="col-md-8">{{report.Name}}</td>
+                            <td class="col-md-4">{{report.AppCount}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-primary btn-block" ng-click="goBack()"> Back</button>
+    <br>
+</div>
