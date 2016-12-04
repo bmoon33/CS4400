@@ -44,10 +44,18 @@
                        id="advisoremail" placeholder="Enter advisor's Georgia Tech email" ng-pattern="emailFormat"
                        required>
 
-                <p ng-show="projectform.advisoremail.$error.pattern
+                <div ng-show="projectform.advisoremail.$error.pattern
                         && !projectform.advisoremail.$pristine" class="help-block">
-                    Must provide Georgia Tech email!
-                </p>
+
+                    <p>
+                        Must provide Georgia Tech email:
+                    </p>
+                    <ul>
+                        <li>Start with a character</li>
+                        <li>May include characters, digits, periods or underscores</li>
+                        <li>@gatech.edu OR @&lt;subdomain&gt;.gatech.edu</li>
+                    </ul>
+                </div>
 
                 <p ng-show="(projectform.advisoremail.$invalid && !projectform.advisoremail.$error.pattern)
                             && !projectform.advisoremail.$pristine" class="help-block">
@@ -90,7 +98,8 @@
             <div class="form-group"
                  ng-class="{'has-error': projectform.designations.$invalid && !projectform.designations.$pristine}">
                 <label for="designation"> Designations </label>
-                <ui-select ng-model="project.designation" theme="bootstrap" id="designation" name="designations" required>
+                <ui-select ng-model="project.designation" theme="bootstrap" id="designation" name="designations"
+                           required>
                     <ui-select-match allow-clear="true">{{$select.selected.Name}}
                     </ui-select-match>
                     <ui-select-choices repeat="designation in designations | filter: {Name: $select.search}">
@@ -111,7 +120,8 @@
                 <input type="number" name="studentcount" ng-model="project.studentcount" class="form-control"
                        id="numstudents" placeholder="Enter estimated # of students" required>
 
-                <p ng-show="projectform.studentcount.$invalid && !projectform.studentcount.$pristine" class="help-block">
+                <p ng-show="projectform.studentcount.$invalid && !projectform.studentcount.$pristine"
+                   class="help-block">
                     Estimated # of students is required!
                 </p>
 
@@ -152,8 +162,6 @@
                 </ui-select>
 
             </div>
-
-
 
 
             <button type="submit" ng-disabled="projectform.$invalid"

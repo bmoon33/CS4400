@@ -48,7 +48,7 @@ angular.module('myAppControllers', ['myAppServices'])
 
     .controller('RegistrationController', function ($scope, $http, loginService) {
         $scope.object = {};
-        $scope.emailFormat = /^[a-z]([a-z0-9._]+)?@([a-z]+.)?gatech.edu$/;
+        $scope.emailFormat = /^[a-z]([a-z0-9._]+)?@(([a-z]+[.]gatech[.]edu)|(gatech[.]edu))$/;
         $scope.passwordFormat = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
         $scope.createUser = function () {
@@ -312,7 +312,7 @@ angular.module('myAppControllers', ['myAppServices'])
     })
 
     .controller('AdminAddProjectController', function ($scope, adminService) {
-        $scope.emailFormat = /^[a-z]([a-z0-9._]+)?@([a-z]+.)?gatech.edu$/;
+        $scope.emailFormat = /^[a-z]([a-z0-9._]+)?@(([a-z]+[.]gatech[.]edu)|(gatech[.]edu))$/;
         $scope.categories = ["cat1", "cat2", "Cat3"];
         $scope.project = {};
         $scope.init = function () {
@@ -339,7 +339,7 @@ angular.module('myAppControllers', ['myAppServices'])
     .controller('AdminAddCourseController', function ($scope, adminService) {
         $scope.course = {};
         $scope.categories = ["cat1", "cat2", "Cat3"];
-        $scope.emailFormat = /^[a-z]([a-z0-9._]+)?@([a-z]+.)?gatech.edu$/;
+        $scope.emailFormat = /^[a-z]([a-z0-9._]+)?@(([a-z]+[.]gatech[.]edu)|(gatech[.]edu))$/;
         $scope.init = function () {
             $scope.course = {};
             var promise = adminService.getCourseFilters();
