@@ -25,9 +25,9 @@
             $title .= "%";
             if ($first) {
                 $first = False;
-                $sql .= "WHERE Name LIKE '$title' ";
+                $sql .= "WHERE Project_name LIKE '$title' ";
             } else {
-                $sql .= "AND Name LIKE '$title' ";
+                $sql .= "AND Project_name LIKE '$title' ";
             }
         }
 
@@ -65,6 +65,7 @@
             $out[] = $row;
         }
 
+
     }
 
     function getCourses($title, $Dname, $categories, $major, $year, $conn, &$out) {
@@ -82,9 +83,9 @@
             $title .= "%";
             if ($first) {
                 $first = False;
-                $sql .= "WHERE Name LIKE '$title' ";
+                $sql .= "WHERE Course_name LIKE '$title' ";
             } else {
-                $sql .= "AND Name LIKE '$title' ";
+                $sql .= "AND Course_name LIKE '$title' ";
             }
         }
 
