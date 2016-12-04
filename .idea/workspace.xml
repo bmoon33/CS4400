@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="298871e4-a7c4-4676-83f6-cecb1884165d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/admin/app.html" afterPath="$PROJECT_DIR$/templates/admin/app.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/student/editProfile.html" afterPath="$PROJECT_DIR$/templates/student/editProfile.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/student/main.html" afterPath="$PROJECT_DIR$/templates/student/main.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/student/me.html" afterPath="$PROJECT_DIR$/templates/student/me.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/student/myApplication.html" afterPath="$PROJECT_DIR$/templates/student/myApplication.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/student/project.html" afterPath="$PROJECT_DIR$/templates/student/project.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/student/register.html" afterPath="$PROJECT_DIR$/templates/student/register.html" />
     </list>
     <ignored path="cs4400.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -53,16 +47,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/admin/app.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="editProfile.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/student/editProfile.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -78,6 +62,26 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-1183">
               <caret line="0" column="44" selection-start-line="0" selection-start-column="44" selection-end-line="0" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="me.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/student/me.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/student/main.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="280">
+              <caret line="76" column="49" selection-start-line="76" selection-start-column="49" selection-end-line="76" selection-end-column="49" />
               <folding />
             </state>
           </provider>
@@ -145,12 +149,12 @@
         <option value="$PROJECT_DIR$/templates/admin/appReport.html" />
         <option value="$PROJECT_DIR$/templates/student/home.html" />
         <option value="$PROJECT_DIR$/templates/student/editProfile.html" />
-        <option value="$PROJECT_DIR$/templates/student/main.html" />
         <option value="$PROJECT_DIR$/templates/student/register.html" />
         <option value="$PROJECT_DIR$/templates/student/project.html" />
         <option value="$PROJECT_DIR$/templates/student/myApplication.html" />
         <option value="$PROJECT_DIR$/templates/student/me.html" />
         <option value="$PROJECT_DIR$/templates/admin/app.html" />
+        <option value="$PROJECT_DIR$/templates/student/main.html" />
       </list>
     </option>
   </component>
@@ -409,7 +413,7 @@
       <workItem from="1480483956093" duration="3841000" />
       <workItem from="1480718768622" duration="13910000" />
       <workItem from="1480758201607" duration="29946000" />
-      <workItem from="1480883278031" duration="2819000" />
+      <workItem from="1480883278031" duration="3097000" />
     </task>
     <task id="LOCAL-00001" summary="Login authentication added">
       <created>1479080374393</created>
@@ -464,7 +468,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="120667000" />
+    <option name="totallyTimeSpent" value="120945000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -640,14 +644,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/student/main.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="122" column="8" selection-start-line="122" selection-start-column="8" selection-end-line="122" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/student/project.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="467">
@@ -660,14 +656,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="392">
           <caret line="32" column="21" selection-start-line="32" selection-start-column="21" selection-end-line="32" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/student/me.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
           <folding />
         </state>
       </provider>
@@ -693,16 +681,6 @@
         <state relative-caret-position="-1183">
           <caret line="0" column="44" selection-start-line="0" selection-start-column="44" selection-end-line="0" selection-end-column="44" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin/addProject.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-343">
-          <caret line="116" column="0" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
-          <folding>
-            <marker date="1480851831000" expanded="true" signature="1326:1488" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -742,6 +720,32 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="197">
           <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/addProject.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-343">
+          <caret line="116" column="0" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
+          <folding>
+            <marker date="1480851831000" expanded="true" signature="1326:1488" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/student/me.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/student/main.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="76" column="49" selection-start-line="76" selection-start-column="49" selection-end-line="76" selection-end-column="49" />
           <folding />
         </state>
       </provider>

@@ -66,29 +66,40 @@
 
     <div class="row">
         <div class="col col-md-12">
-            <!--<div class="btn-bar">-->
-            <!--<label class="btn btn-primary " ng-model="object.radio" uib-btn-radio="'Project'">Project</label>-->
-            <!--<label class="btn btn-primary " ng-model="object.radio" uib-btn-radio="'Course'">Course</label>-->
-            <!--<label class="btn btn-primary" ng-model="object.radio" uib-btn-radio="'Both'">Both</label>-->
-            <!--<p>{{object.radio}}</p>-->
-            <!--</div>-->
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="btn btn-default btn-block" ng-model="object.filterType" uib-btn-radio="'Project'">Project</label>
+                </div>
+                <div class="col-md-4">
+                    <label class="btn btn-default btn-block" ng-model="object.filterType" uib-btn-radio="'Course'">Course</label>
+                </div>
+                <div class="col-md-4">
+                    <label class="btn btn-default btn-block" ng-model="object.filterType" uib-btn-radio="'Both'">Both</label>
+                </div>
 
-            <div>
-                <form>
-                    <label>
-                        <input type="radio" ng-model="object.filterType"
-                               value="Project"> Project
-                    </label>
 
-                    <label><input type="radio" ng-model="object.filterType"
-                                  value="Course"> Course</label>
-                    <label><input type="radio" ng-model="object.filterType"
-                                  value="Both"> Both</label>
-                </form>
+
             </div>
+
+            <!--<div>-->
+                <!--<form>-->
+                    <!--<label>-->
+                        <!--<input type="radio" ng-model="object.filterType"-->
+                               <!--value="Project"> Project-->
+                    <!--</label>-->
+
+                    <!--<label><input type="radio" ng-model="object.filterType"-->
+                                  <!--value="Course"> Course</label>-->
+                    <!--<label><input type="radio" ng-model="object.filterType"-->
+                                  <!--value="Both"> Both</label>-->
+                <!--</form>-->
+            <!--</div>-->
             <br><br>
             <button class="btn btn-block btn-success" ng-click="applyFilters()">Apply Filter</button>
             <button class="btn btn-block btn-warning" ng-click="init()">Reset Filter</button>
+            <button class="btn btn-primary btn-block" ng-click="goBack()">
+                Back
+            </button>
         </div>
     </div>
 
@@ -117,8 +128,5 @@
         </div>
     </div>
 
-    <button class="btn btn-primary btn-block" ng-click="goBack()">
-        Back
-    </button>
-    <br>
+
 </div>
