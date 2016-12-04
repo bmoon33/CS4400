@@ -2,7 +2,7 @@
 
     include_once("db.php");
 
-    function getProjects($title, $Dname, $categories, $conn, &$out) {
+    function getProjects($title, $Dname, $categories, $major, $year, $conn, &$out) {
 
         $first = True;
 
@@ -39,6 +39,24 @@
                 $sql .= "AND Category_name IN ('$categories') ";
             }
         }
+
+        if ($major) {
+            if ($first) {
+                $first = False;
+                $sql .= "WHERE Major_requirement IN ($major) ";
+            } else {
+                $sql .= "AND Major_requirement IN ($major) ";
+            }
+        }
+
+        if ($year) {
+            if ($first) {
+                $first = False;
+                $sql .= "WHERE Year_requirement IN ($year) ";
+            } else {
+                $sql .= "AND Year_requirement IN ($year) ";
+            }
+        }
         
         $result = mysqli_query($conn, $sql);
 
@@ -46,11 +64,16 @@
         while ($row = mysqli_fetch_assoc($result)) {
             $out[] = $row;
         }
+
     }
 
-    function getCourses($title, $Dname, $categories, $conn, &$out) {
+    function getCourses($title, $Dname, $categories, $major, $year, $conn, &$out) {
 
         $first = True;
+
+        if ($major || $year) {
+            return;
+        }
 
         $sql = "SELECT DISTINCT Course_name as Name, 'Course' as Type FROM Course_is_Category AS CIC 
                 JOIN Course AS C ON C.Name = CIC.Course_name ";
@@ -100,12 +123,23 @@
     $title = $myArray[0]["title"];
     $Dname = $myArray[0]["designation"]["Name"];
     $filterType = $myArray[0]["filterType"];
+    $major = $myArray[0]["major"]["Name"];
+    $year = $myArray[0]["year"];
+
 
     foreach($myArray[0]["category"] as $key => $value) {
             array_push($categories, $value["Name"]);
     }
 
     $categories = implode("','",$categories);
+
+    if ($major) {
+        $major = "'" . $major ." students only', 'no major requirement for this project'";
+    } 
+    if ($year) {
+        $year = "'" . $year ." students only', 'no year requirement for this project'";;
+    }
+
     $out = array();
 
 
@@ -114,12 +148,12 @@
 
     if ($filterType == "Both") {
 
-        getProjects($title, $Dname, $categories, $conn, $out);
-        getCourses($title, $Dname, $categories, $conn, $out);
+        getProjects($title, $Dname, $categories, $major, $year, $conn, $out);
+        getCourses($title, $Dname, $categories, $major, $year, $conn, $out);
     } elseif($filterType == "Project") {
-        getProjects($title, $Dname, $categories, $conn, $out);
+        getProjects($title, $Dname, $categories, $major, $year, $conn, $out);
     } else {
-        getCourses($title, $Dname, $categories, $conn, $out);
+        getCourses($title, $Dname, $categories, $major, $year, $conn, $out);
     }
 
     echo json_encode($out);

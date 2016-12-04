@@ -1,11 +1,13 @@
 <?php
 
     include_once("db.php");
+    mysqli_set_charset($conn, 'utf8');
 
     $jsonText = file_get_contents('php://input');
     $decodedText = html_entity_decode($jsonText);
     $myArray = json_decode('[' . $decodedText . ']', true);
-    $name = $myArray[0]["Name"];
+    // $name = $myArray[0]["Name"];
+    $name = "evolvEd";
 
    
         

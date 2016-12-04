@@ -134,16 +134,7 @@ angular.module('myAppControllers', ['myAppServices'])
         };
     })
 
-    .controller('ProjectController', function ($scope, $stateParams, projectService) {
-        if ($stateParams.data != null) {
-            $scope.data = $stateParams.data;
-            $scope.bool = $scope.data.Type == 'Course'; //True if type is course, false if project
-            projectService.updateLast($stateParams.data);
-        } else {
-            $scope.data = projectService.getLast();
-            $scope.bool = $scope.data.Type == 'Course';
-        }
-
+    .controller('ProjectController', function ($scope, $stateParams, projectService, $q) {
         $scope.init = function () {
             $scope.project = {};
             $scope.course = {};
@@ -152,6 +143,7 @@ angular.module('myAppControllers', ['myAppServices'])
             promise.then(function (res) {
                 if (!$scope.bool) {
                     $scope.project = res.data[0];
+                    console.log(res);
                     var appStatus = projectService.checkStatus($scope.data);
                     appStatus.then(function (res) {
                         console.log(res.data);
@@ -161,43 +153,53 @@ angular.module('myAppControllers', ['myAppServices'])
                     $scope.course = res.data[0];
                 }
             });
-
-            var categories = projectService.getCategories($scope.data);
-            categories.then(function (res) {
-                var cat = '';
+            var categories = '';
+            var catPromise = projectService.getCategories($scope.data);
+            catPromise.then(function (res) {
                 for (var i = 0; i < res.data.length; i++) {
                     if (i == res.data.length - 1) {
-                        cat += res.data[i].Category_name;
+                        categories += res.data[i].Category_name;
                     } else {
-                        cat += res.data[i].Category_name + ', ';
+                        categories += res.data[i].Category_name + ', ';
                     }
-                }
-                if (!$scope.bool) {
-                    $scope.project.categories = cat;
-                } else {
-                    $scope.course.categories = cat;
                 }
             });
 
+
+            var reqPromise;
+            var requirements = {};
             if (!$scope.bool) {
-                var restrictions = projectService.getRequirements($scope.data);
-                restrictions.then(function (res) {
-                    var str = '';
-                    for (var i = 0; i < res.data.length; i++) {
-                        if (i == res.data.length - 1) {
-                            str += res.data[i].Requirement;
-                        } else {
-                            str += res.data[i].Requirement + ', ';
-                        }
-                    }
-                    $scope.project.requirements = str;
+                reqPromise = projectService.getRequirements($scope.data);
+                reqPromise.then(function (res) {
+                    requirements.yearReq = res.data[0].Year_requirement;
+                    requirements.majorReq = res.data[0].Major_requirement;
+                    requirements.deptReq = res.data[0].Department_requirement;
                 })
             }
 
+            $q.all([reqPromise, catPromise, promise])
+                .then(function () {
+                    if (!$scope.bool) {
+                        $scope.project.categories = categories;
+                        $scope.project.requirements = requirements;
+                    } else {
+                        $scope.course.categories = categories;
+                    }
+
+                })
+
         };
 
+        if ($stateParams.data != null) {
+            $scope.data = $stateParams.data;
+            $scope.bool = $scope.data.Type == 'Course'; //True if type is course, false if project
+            projectService.updateLast($stateParams.data);
+        } else {
+            $scope.data = projectService.getLast();
+            $scope.bool = $scope.data.Type == 'Course';
+        }
+
         $scope.apply = function (data) {
-            console.log(data);
             if ($scope.status == 'reject') {
                 swal({
                     title: "Cannot apply again!",
@@ -217,8 +219,12 @@ angular.module('myAppControllers', ['myAppServices'])
                     type: "warning"
                 })
             } else {
-                projectService.apply(data);
-                $scope.status = 'pending';
+                var val = projectService.apply(data);
+                val.then(function (res) {
+                    if (res) {
+                        $scope.status = 'pending';
+                    }
+                })
             }
         }
     })

@@ -1,6 +1,7 @@
 <?php
 
     include_once("db.php");
+    mysqli_set_charset($conn, 'utf8');
 
     $jsonText = file_get_contents('php://input');
     $decodedText = html_entity_decode($jsonText);

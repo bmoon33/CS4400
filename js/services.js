@@ -111,25 +111,34 @@ angular.module('myAppServices', [])
     .factory("projectService", function ($http) {
         return {
             apply: function (data) {
-                $http({
+                return $http({
                     method: 'POST',
                     url: 'DBFiles/apply.php',
                     data: data
                 })
                     .then(function (res) {
-                        console.log(res);
                         if (res.data) {
-                            swal({
-                                title: "Error",
-                                text: "Please try again",
-                                type: "error"
-                            })
+                            if (res.data == 'Requirements error') {
+                                swal({
+                                    title: "Error",
+                                    text: "You do not meet the project requirements!",
+                                    type: "error"
+                                })
+                            } else {
+                                swal({
+                                    title: "Error",
+                                    text: "Please try again",
+                                    type: "error"
+                                })
+                            }
+                            return false;
                         } else {
                             swal({
                                 title: "Successfully Applied!",
                                 text: "An admin will review your application and make a decision.",
                                 type: "success"
-                            })
+                            });
+                            return true;
                         }
                     });
 
