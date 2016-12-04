@@ -107,10 +107,10 @@ angular.module('myAppControllers', ['myAppServices'])
 
 
         $scope.years = [
-            'Freshman',
-            'Sophomore',
-            'Junior',
-            'Senior'
+            'freshman',
+            'sophomore',
+            'junior',
+            'senior'
         ];
 
         $scope.submit = function () {
