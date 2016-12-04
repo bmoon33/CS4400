@@ -111,6 +111,22 @@ angular.module('myApp', ['ui.router', 'ui.bootstrap', 'myAppControllers', 'ngSan
                 adminAuth: true
             })
 
+            .state('addProjectAdmin', {
+                name: 'Add Project',
+                url: '/addProjectAdmin',
+                templateUrl: 'templates/admin/addProject.html',
+                controller: 'AdminAddProjectController',
+                adminAuth: true
+            })
+
+            .state('addCourseAdmin', {
+                name: 'Add Course',
+                url: '/addCourseAdmin',
+                templateUrl: 'templates/admin/addCourse.html',
+                controller: 'AdminAddCourseController',
+                adminAuth: true
+            })
+
         ;
 
         $urlRouterProvider.otherwise('/home');

@@ -4,16 +4,12 @@
     include_once("../authentication/db.php");
 
 
-    //$user = $_SESSION['username'];
-
     $jsonText = file_get_contents('php://input');
     $decodedText = html_entity_decode($jsonText);
     $myArray = json_decode('[' . $decodedText . ']', true);
 
     $username = $myArray[0]["Username"];
     $appname = $myArray[0]["Name"];
-
-    echo 
 
 
     

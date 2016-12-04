@@ -61,7 +61,8 @@
             </div>
 
             <div class="form-group"
-                 ng-class="{'has-error': (registration.password2.$error.pwmatch || registration.password2.$error.pattern) && !registration.password2.$pristine}">
+                 ng-class="{'has-error': (registration.password2.$error.pwmatch
+                 || registration.password2.$error.pattern) && !registration.password2.$pristine}">
 
                 <label for="password2"> Confirm Password </label>
 

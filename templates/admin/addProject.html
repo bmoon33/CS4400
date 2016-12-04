@@ -1,0 +1,172 @@
+<div class="container-fluid" ng-init="init()">
+    <br>
+    <div class="row">
+        <form name="projectform" novalidate>
+
+            <div class="form-group"
+                 ng-class="{'has-error': projectform.name.$invalid && !projectform.name.$pristine}">
+
+                <label for="name"> Project Name </label>
+
+                <input type="text" name="name" ng-model="project.name" class="form-control"
+                       id="name" placeholder="Enter project name" required>
+
+                <p ng-show="projectform.name.$invalid && !projectform.name.$pristine" class="help-block">
+                    Project name is required!
+                </p>
+
+
+            </div>
+
+            <div class="form-group"
+                 ng-class="{'has-error': projectform.advisor.$invalid && !projectform.advisor.$pristine}">
+
+                <label for="advisor"> Advisor </label>
+
+                <input type="text" name="advisor" ng-model="project.advisor" class="form-control"
+                       id="advisor" placeholder="Enter advisor name" required>
+
+                <p ng-show="projectform.advisor.$invalid && !projectform.advisor.$pristine" class="help-block">
+                    Advisor name is required!
+                </p>
+
+
+            </div>
+
+            <div class="form-group"
+                 ng-class="{'has-error': (projectform.advisoremail.$error.minlength || projectform.advisoremail.$invalid)
+                            && !projectform.advisoremail.$pristine}">
+
+                <label for="advisoremail"> Advisor Email </label>
+
+
+                <input type="email" name="advisoremail" ng-model="project.email" class="form-control"
+                       id="advisoremail" placeholder="Enter advisor's Georgia Tech email" ng-pattern="emailFormat"
+                       required>
+
+                <p ng-show="projectform.advisoremail.$error.pattern
+                        && !projectform.advisoremail.$pristine" class="help-block">
+                    Must provide Georgia Tech email!
+                </p>
+
+                <p ng-show="(projectform.advisoremail.$invalid && !projectform.advisoremail.$error.pattern)
+                            && !projectform.advisoremail.$pristine" class="help-block">
+                    Advisor email is required!
+                </p>
+
+
+            </div>
+
+            <div class="form-group"
+                 ng-class="{'has-error': projectform.description.$invalid && !projectform.description.$pristine}">
+
+                <label for="description"> Description </label>
+
+                <input type="text" name="description" ng-model="project.description" class="form-control"
+                       id="description" placeholder="Enter project description" required>
+
+                <p ng-show="projectform.description.$invalid && !projectform.description.$pristine" class="help-block">
+                    Project description is required!
+                </p>
+
+            </div>
+
+            <div class="form-group"
+                 ng-class="{'has-error': projectform.categories.$invalid && !projectform.categories.$pristine}">
+                <label for="category"> Categories</label>
+                <ui-select multiple ng-model="project.category" name="categories" theme="bootstrap" id="category"
+                           required>
+                    <ui-select-match>{{$item.Name}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="category in categories| filter: $select.search">
+                        <div ng-bind-html="category.Name | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+                <p ng-show="projectform.categories.$invalid && !projectform.categories.$pristine" class="help-block">
+                    At least one category is required!
+                </p>
+            </div>
+
+            <div class="form-group"
+                 ng-class="{'has-error': projectform.designations.$invalid && !projectform.designations.$pristine}">
+                <label for="designation"> Designations </label>
+                <ui-select ng-model="project.designation" theme="bootstrap" id="designation" name="designations" required>
+                    <ui-select-match allow-clear="true">{{$select.selected.Name}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="designation in designations | filter: {Name: $select.search}">
+                        <div ng-bind-html="designation.Name | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+                <p ng-show="projectform.designations.$invalid && !projectform.designations.$pristine"
+                   class="help-block">
+                    A designation is required!
+                </p>
+            </div>
+
+            <div class="form-group"
+                 ng-class="{'has-error': projectform.studentcount.$invalid && !projectform.studentcount.$pristine}">
+
+                <label for="numstudents"> Estimated # of students </label>
+
+                <input type="number" name="studentcount" ng-model="project.studentcount" class="form-control"
+                       id="numstudents" placeholder="Enter estimated # of students" required>
+
+                <p ng-show="projectform.studentcount.$invalid && !projectform.studentcount.$pristine" class="help-block">
+                    Estimated # of students is required!
+                </p>
+
+            </div>
+
+            <div class="form-group">
+                <label for="major"> Major Requirement </label>
+                <ui-select ng-model="project.major" theme="bootstrap" id="major" name="major">
+                    <ui-select-match allow-clear="true">{{$select.selected.Name}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="major in majors | filter: {Name: $select.search}">
+                        <div ng-bind-html="major.Name | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+
+            </div>
+
+            <div class="form-group">
+                <label for="year"> Year Requirement </label>
+                <ui-select ng-model="project.year" theme="bootstrap" id="year" name="year">
+                    <ui-select-match allow-clear="true">{{$select.selected.Name}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="year in years| filter: {Name: $select.search}">
+                        <div ng-bind-html="year.Name | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+
+            </div>
+
+            <div class="form-group">
+                <label for="dept"> Department Requirement </label>
+                <ui-select ng-model="project.dept" theme="bootstrap" id="dept" name="dept">
+                    <ui-select-match allow-clear="true">{{$select.selected.Name}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="dept in departments| filter: {Name: $select.search}">
+                        <div ng-bind-html="dept.Name | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+
+            </div>
+
+
+
+
+            <button type="submit" ng-disabled="projectform.$invalid"
+                    class="btn btn-success btn-block" ng-click="addProject(project)"> Add Project
+            </button>
+            <br>
+
+            <button class="btn btn-primary btn-block" ng-click="goBack()">
+                Back
+            </button>
+            <br>
+
+        </form>
+    </div>
+
+</div>

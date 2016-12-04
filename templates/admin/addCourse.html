@@ -1,0 +1,112 @@
+<div class="container-fluid" ng-init="init()">
+    <br>
+    <div class="row">
+        <form name="courseform" novalidate>
+
+            <div class="form-group"
+                 ng-class="{'has-error': courseform.number.$invalid && !courseform.number.$pristine}">
+
+                <label for="number"> Course Number </label>
+
+                <input type="text" name="number" ng-model="course.number" class="form-control"
+                       id="number" placeholder="Enter course number" required>
+
+                <p ng-show="courseform.number.$invalid && !courseform.number.$pristine" class="help-block">
+                    Course number is required!
+                </p>
+
+
+            </div>
+
+            <div class="form-group"
+                 ng-class="{'has-error': courseform.name.$invalid && !courseform.name.$pristine}">
+
+                <label for="name"> Course Name </label>
+
+                <input type="text" name="name" ng-model="course.name" class="form-control"
+                       id="name" placeholder="Enter course name" required>
+
+                <p ng-show="courseform.name.$invalid && !courseform.name.$pristine" class="help-block">
+                    Course name is required!
+                </p>
+
+
+            </div>
+
+            <div class="form-group"
+                 ng-class="{'has-error': courseform.instructor.$invalid && !courseform.instructor.$pristine}">
+
+                <label for="instructor"> Instructor </label>
+
+                <input type="text" name="instructor" ng-model="course.instructor" class="form-control"
+                       id="instructor" placeholder="Enter instructor name" required>
+
+                <p ng-show="courseform.instructor.$invalid && !courseform.instructor.$pristine" class="help-block">
+                    Instructor name is required!
+                </p>
+
+
+            </div>
+
+            
+            <div class="form-group"
+                 ng-class="{'has-error': courseform.categories.$invalid && !courseform.categories.$pristine}">
+                <label for="category"> Categories</label>
+                <ui-select multiple ng-model="course.category" name="categories" theme="bootstrap" id="category"
+                           required>
+                    <ui-select-match>{{$item.Name}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="category in categories| filter: $select.search">
+                        <div ng-bind-html="category.Name | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+                <p ng-show="courseform.categories.$invalid && !courseform.categories.$pristine" class="help-block">
+                    At least one category is required!
+                </p>
+            </div>
+
+            <div class="form-group"
+                 ng-class="{'has-error': courseform.designations.$invalid && !courseform.designations.$pristine}">
+                <label for="designation"> Designations </label>
+                <ui-select ng-model="course.designation" theme="bootstrap" id="designation" name="designations" required>
+                    <ui-select-match allow-clear="true">{{$select.selected.Name}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="designation in designations | filter: {Name: $select.search}">
+                        <div ng-bind-html="designation.Name | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+                <p ng-show="courseform.designations.$invalid && !courseform.designations.$pristine"
+                   class="help-block">
+                    A designation is required!
+                </p>
+            </div>
+
+            <div class="form-group"
+                 ng-class="{'has-error': courseform.studentcount.$invalid && !courseform.studentcount.$pristine}">
+
+                <label for="numstudents"> Estimated # of students </label>
+
+                <input type="number" name="studentcount" ng-model="course.studentcount" class="form-control"
+                       id="numstudents" placeholder="Enter estimated # of students" required>
+
+                <p ng-show="courseform.studentcount.$invalid && !courseform.studentcount.$pristine" class="help-block">
+                    Estimated # of students is required!
+                </p>
+
+            </div>
+
+
+            <button type="submit" ng-disabled="courseform.$invalid"
+                    class="btn btn-success btn-block" ng-click="addCourse(course)"> Add Course
+            </button>
+            <br>
+
+            <button class="btn btn-primary btn-block" ng-click="goBack()">
+                Back
+            </button>
+            <br>
+
+        </form>
+    </div>
+
+</div>

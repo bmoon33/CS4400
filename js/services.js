@@ -253,7 +253,7 @@ angular.module('myAppServices', [])
                     data: data
                 })
                     .then(function (res) {
-                        if (res) {
+                        if (res.data) {
                             swal({
                                 title: "Error",
                                 text: "Please try again",
@@ -269,7 +269,7 @@ angular.module('myAppServices', [])
                     data: data
                 })
                     .then(function (res) {
-                        if (res) {
+                        if (res.data) {
                             swal({
                                 title: "Error",
                                 text: "Please try again",
@@ -286,6 +286,45 @@ angular.module('myAppServices', [])
             },
             getAppReportHeader: function () {
                 return $http.get('DBFiles/admin/appReportHeader.php');
+            },
+            addProject: function (data) {
+                $http({
+                    method: 'POST',
+                    url: 'DBFiles/admin/addProject.php',
+                    data: data
+                })
+                    .then(function (res) {
+                        if (res.data) {
+                            console.log(res);
+                            swal({
+                                title: "Error",
+                                text: "Please try again",
+                                type: "error"
+                            })
+                        }
+                    })
+            },
+            addCourse: function (data) {
+                $http({
+                    method: 'POST',
+                    url: 'DBFiles/admin/addCourse.php',
+                    data: data
+                })
+                    .then(function (res) {
+                        if (res.data) {
+                            swal({
+                                title: "Error",
+                                text: "Please try again",
+                                type: "error"
+                            })
+                        }
+                    })
+            },
+            getProjectFilters: function () {
+                return $http.get('DBFiles/admin/getProjectFilters.php');
+            },
+            getCourseFilters: function () {
+                return $http.get('DBFiles/admin/getCourseFilters.php');
             }
         }
 

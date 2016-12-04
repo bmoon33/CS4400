@@ -310,4 +310,48 @@ angular.module('myAppControllers', ['myAppServices'])
         }
     })
 
+    .controller('AdminAddProjectController', function ($scope, adminService) {
+        $scope.emailFormat = /^[a-z]+[a-z0-9._]+@gatech.edu$/;
+        $scope.categories = ["cat1", "cat2", "Cat3"];
+        $scope.project = {};
+        $scope.init = function () {
+            $scope.project = {};
+
+            var promise = adminService.getProjectFilters();
+            promise.then(function (res) {
+                $scope.categories = res.data.Category;
+                $scope.designations = res.data.Designation;
+                $scope.majors = res.data.Major;
+                $scope.years = res.data.Year;
+                $scope.departments = res.data.Department;
+                $scope.project.major = {Name: 'no major requirement for this project'};
+                $scope.project.year = {Name: 'no year requirement for this project'};
+                $scope.project.dept = {Name: 'no department requirement for this project'};
+            })
+        };
+
+        $scope.addProject = function (data) {
+            console.log(data);
+            adminService.addProject(data);
+        }
+    })
+
+    .controller('AdminAddCourseController', function ($scope, adminService) {
+        $scope.course = {};
+        $scope.categories = ["cat1", "cat2", "Cat3"];
+        $scope.emailFormat = /^[a-z]+[a-z0-9._]+@gatech.edu$/;
+        $scope.init = function () {
+            $scope.course = {};
+            var promise = adminService.getCourseFilters();
+            promise.then(function (res) {
+                $scope.categories = res.data.Category;
+                $scope.designations = res.data.Designation;
+            })
+        };
+
+        $scope.addCourse = function (data) {
+            adminService.addCourse(data);
+        }
+    })
+
 ;

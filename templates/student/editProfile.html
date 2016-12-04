@@ -1,6 +1,5 @@
 <div class="container-fluid" ng-init="getValues()" title="Edit Profile">
     <br>
-    <h3><a ui-sref="home">Home Page</a></h3>
 
     <div class="row">
         <form>
@@ -36,7 +35,10 @@
     </div>
 
     <div class="row">
-        <button class="btn btn-primary btn-block" ng-click="submit()">Submit</button>
+        <button class="btn btn-success btn-block" ng-click="submit()">Submit</button>
+        <button class="btn btn-primary btn-block" ng-click="goBack()">
+            Back
+        </button>
     </div>
 
 
